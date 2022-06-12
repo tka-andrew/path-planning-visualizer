@@ -1,0 +1,1 @@
+sudo docker build --rm --force-rm -t tka-andrew/path-planning-visualizer:latest .
