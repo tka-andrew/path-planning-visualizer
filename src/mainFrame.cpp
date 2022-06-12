@@ -17,8 +17,8 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     m_lp = new LeftPanel(m_parent);
     m_rp = new RightPanel(m_parent);
 
-    hbox->Add(m_lp, 1, wxEXPAND, 5);
-    hbox->Add(m_rp, 0, wxSHAPED, 5);
+    hbox->Add(m_lp, 0, wxSHAPED, 5);
+    hbox->Add(m_rp, 1, wxEXPAND, 5);
 
     m_parent->SetSizer(hbox);
 

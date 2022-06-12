@@ -21,11 +21,14 @@ class LeftPanel : public wxPanel
 public:
 
     LeftPanel(wxPanel *parent);
+    void OnDefineEnvironment(wxCommandEvent & event);
 
     wxButton *m_defineEnvironment;
     wxStaticText *m_startingPoint;
     wxStaticText *m_destinationPoint;
     wxPanel *m_parent;
 };
+
+const int ID_DEFINE_ENVIRONMENT = 101;
 
 #endif // PANELS_H

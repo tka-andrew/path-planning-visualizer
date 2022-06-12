@@ -20,6 +20,3 @@ WORKDIR /src/PathPlanningVisualizer/build
 
 # REFERENCE: https://unix.stackexchange.com/questions/230238/x-applications-warn-couldnt-connect-to-accessibility-bus-on-stderr
 ENV NO_AT_BRIDGE=1
-
-# This command runs your application
-CMD ["./PathPlanningVisualizer"]

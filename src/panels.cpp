@@ -2,10 +2,10 @@
 #include "panels.h"
 
 LeftPanel::LeftPanel(wxPanel *parent)
-    : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(-1, -1), wxBORDER_SUNKEN)
+    : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(200, 200), wxBORDER_SUNKEN)
 {
     m_parent = parent;
-    m_defineEnvironment = new wxButton(this, ID_SET_WALL, wxT("Define environment"),
+    m_defineEnvironment = new wxButton(this, ID_DEFINE_ENVIRONMENT, wxT("Define environment"),
                              wxPoint(10, 10));
 
 
@@ -14,7 +14,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     m_startingPoint = new wxStaticText(this, wxID_ANY, "Starting Point:\nundefined", wxPoint(10, 400), wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
     m_destinationPoint = new wxStaticText(this, wxID_ANY, "Destination Point:\nundefined", wxPoint(10, 500), wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
 
-    Connect(ID_SET_WALL, wxEVT_COMMAND_BUTTON_CLICKED,
+    Connect(ID_DEFINE_ENVIRONMENT, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnDefineEnvironment));
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
@@ -23,9 +23,15 @@ LeftPanel::LeftPanel(wxPanel *parent)
     this->SetSizer(sizer);
 }
 
+void LeftPanel::OnDefineEnvironment(wxCommandEvent &WXUNUSED(event))
+{
+    return;
+}
+
+
 RightPanel::RightPanel(wxPanel *parent)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition,
-              wxSize(200, 200), wxBORDER_SUNKEN)
+              wxSize(-1, -1), wxBORDER_SUNKEN)
 {
 
     // Create a wxGrid object
