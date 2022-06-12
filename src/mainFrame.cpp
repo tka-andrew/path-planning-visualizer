@@ -2,25 +2,27 @@
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_MENU(wxID_EXIT, MainFrame::OnExit)
-    EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
-    EVT_MENU(ID_USAGEGUIDE, MainFrame::OnUsageGuide)
-wxEND_EVENT_TABLE()
+        EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
+            EVT_MENU(ID_USAGEGUIDE, MainFrame::OnUsageGuide)
+                wxEND_EVENT_TABLE()
 
-MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
+                    MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
 
     m_parent = new wxPanel(this, wxID_ANY);
 
-    wxBoxSizer *hbox = new wxBoxSizer(wxHORIZONTAL);
+    m_sizer = new wxBoxSizer(wxHORIZONTAL);
 
     m_lp = new LeftPanel(m_parent);
-    m_rp = new RightPanel(m_parent);
+    m_pathFindingPanel = new PathFindingPanel(m_parent);
+    m_environmentGeometryPanel = new EnvironmentGeometryPanel(m_parent);
 
-    hbox->Add(m_lp, 0, wxSHAPED, 5);
-    hbox->Add(m_rp, 1, wxEXPAND, 5);
+    m_sizer->Add(m_lp, 0, wxSHAPED, 5);
+    m_sizer->Add(m_environmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
+    m_pathFindingPanel->Hide();
 
-    m_parent->SetSizer(hbox);
+    m_parent->SetSizer(m_sizer);
 
     this->Centre();
 
@@ -37,7 +39,6 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     SetMenuBar(menuBar);
     CreateStatusBar();
     SetStatusText("Path Planning Visualizer - by Tan Kui An Andrew 2022");
-
 }
 
 void MainFrame::OnExit(wxCommandEvent &event)
@@ -57,4 +58,24 @@ void MainFrame::OnUsageGuide(wxCommandEvent &event)
 {
     wxMessageBox("TODO",
                  "Usage Guide", wxOK | wxICON_INFORMATION);
+}
+
+void MainFrame::switchPanel(int panelNum)
+{
+    switch (panelNum)
+    {
+    case 1:
+        m_sizer->Detach(1); // remove panel 1, which is the right panel
+        m_pathFindingPanel->Hide();
+        m_sizer->Add(m_environmentGeometryPanel, 1, wxGROW);
+        m_environmentGeometryPanel->Show();
+        break;
+    case 3:
+        m_sizer->Detach(1); // remove panel 1, which is the right panel
+        m_environmentGeometryPanel->Hide();
+        m_sizer->Add(m_pathFindingPanel, 1, wxGROW);
+        m_pathFindingPanel->Show();
+        break;
+    }
+    m_sizer->Layout();
 }

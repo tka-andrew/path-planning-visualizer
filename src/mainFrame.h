@@ -1,7 +1,7 @@
 #ifndef MAINFRAME_H
 #define MAINFRAME_H
 
-#include "panels.h"  
+#include "panels.h"
 
 #include <wx/wx.h>
 #include <wx/grid.h>
@@ -16,12 +16,16 @@ class MainFrame : public wxFrame
 public:
     MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
     LeftPanel *m_lp;
-    RightPanel *m_rp;
+    PathFindingPanel *m_pathFindingPanel;
+    EnvironmentGeometryPanel *m_environmentGeometryPanel;
     wxPanel *m_parent;
+    wxBoxSizer *m_sizer;
+    int currentPanel = 1;
     std::array<int, 2> startingPoint = {-1, -1};
     std::array<int, 2> destinationPoint = {-1, -1};
     bool startingPointDefined = false;
     bool destinationPointDefined = false;
+    void switchPanel(int panelNum);
 
 private:
     void OnExit(wxCommandEvent &event);
@@ -33,6 +37,5 @@ enum
 {
     ID_USAGEGUIDE = 1
 };
-
 
 #endif

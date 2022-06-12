@@ -5,9 +5,8 @@ LeftPanel::LeftPanel(wxPanel *parent)
     : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(200, 200), wxBORDER_SUNKEN)
 {
     m_parent = parent;
-    m_defineEnvironment = new wxButton(this, ID_DEFINE_ENVIRONMENT, wxT("Define environment"),
-                             wxPoint(10, 10));
-
+    m_defineEnvironment = new wxButton(this, ID_DEFINE_ENVIRONMENT, wxT("Define environment"));
+    m_pathFinding = new wxButton(this, ID_PATHFINDING, wxT("Path finding"));
 
     // REFERENCE: https://forums.wxwidgets.org/viewtopic.php?t=43787
     // wxST_NO_AUTORESIZE flag is added to prevent it from auto-sizing
@@ -16,20 +15,37 @@ LeftPanel::LeftPanel(wxPanel *parent)
 
     Connect(ID_DEFINE_ENVIRONMENT, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnDefineEnvironment));
+    Connect(ID_PATHFINDING, wxEVT_COMMAND_BUTTON_CLICKED,
+            wxCommandEventHandler(LeftPanel::OnPathFinding));
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(m_defineEnvironment, 0, wxEXPAND, 0);
+    sizer->Add(m_pathFinding, 0, wxEXPAND, 0);
     sizer->SetSizeHints(this);
     this->SetSizer(sizer);
 }
 
 void LeftPanel::OnDefineEnvironment(wxCommandEvent &WXUNUSED(event))
 {
-    return;
+    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    if (mainFrame->currentPanel != 1)
+    {
+        mainFrame->switchPanel(1);
+        mainFrame->currentPanel = 1;
+    }
 }
 
+void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
+{
+    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    if (mainFrame->currentPanel != 3)
+    {
+        mainFrame->switchPanel(3);
+        mainFrame->currentPanel = 3;
+    }
+}
 
-RightPanel::RightPanel(wxPanel *parent)
+PathFindingPanel::PathFindingPanel(wxPanel *parent)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition,
               wxSize(-1, -1), wxBORDER_SUNKEN)
 {
@@ -51,7 +67,19 @@ RightPanel::RightPanel(wxPanel *parent)
     grid->HideRowLabels();
     grid->HideColLabels();
 
-    wxBoxSizer *hbox = new wxBoxSizer(wxVERTICAL);
-    hbox->Add(grid, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALL, 20);
-    this->SetSizer(hbox);
+    wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
+    vbox->Add(grid, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALL, 20);
+    this->SetSizer(vbox);
+}
+
+EnvironmentGeometryPanel::EnvironmentGeometryPanel(wxPanel *parent)
+    : wxPanel(parent, wxID_ANY, wxDefaultPosition,
+              wxSize(-1, -1), wxBORDER_SUNKEN)
+{
+    m_uploadImage = new wxButton(this, ID_UPLOAD_IMAGE, wxT("Upload Image"),
+                                 wxPoint(10, 10));
+
+    wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
+    vbox->Add(m_uploadImage, 0, wxSHAPED, 0);
+    this->SetSizer(vbox);
 }
