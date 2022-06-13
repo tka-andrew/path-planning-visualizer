@@ -34,6 +34,14 @@ public:
     EnvironmentGeometryPanel(wxPanel *parent);
     wxPanel *m_parent;
     wxButton *m_uploadImage;
+
+    // REFERENCE: https://wiki.wxwidgets.org/Drawing_on_a_panel_with_a_DC
+    // REFERENCE: https://www.informit.com/articles/article.aspx?p=405047
+    void OnPaint(wxPaintEvent & evt);
+    void paintNow(); // actually doesnt need this
+    void OnMotion(wxMouseEvent& event);
+    void render(wxDC& dc);
+    wxDECLARE_EVENT_TABLE();
 };
 
 const int ID_DEFINE_ENVIRONMENT = 101;

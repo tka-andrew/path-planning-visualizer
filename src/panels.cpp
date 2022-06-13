@@ -72,6 +72,10 @@ PathFindingPanel::PathFindingPanel(wxPanel *parent)
     this->SetSizer(vbox);
 }
 
+wxBEGIN_EVENT_TABLE(EnvironmentGeometryPanel, wxPanel)
+    EVT_MOTION(EnvironmentGeometryPanel::OnMotion)
+wxEND_EVENT_TABLE()
+
 EnvironmentGeometryPanel::EnvironmentGeometryPanel(wxPanel *parent)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition,
               wxSize(-1, -1), wxBORDER_SUNKEN)
@@ -82,4 +86,16 @@ EnvironmentGeometryPanel::EnvironmentGeometryPanel(wxPanel *parent)
     wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
     vbox->Add(m_uploadImage, 0, wxSHAPED, 0);
     this->SetSizer(vbox);
+}
+
+void EnvironmentGeometryPanel::OnMotion(wxMouseEvent& event)
+{
+    if (event.Dragging())
+    {
+        wxClientDC dc(this);
+        wxPen pen(wxColor(0,0,0), 10 ); // black pen of width 5
+        dc.SetPen(pen);
+        dc.DrawPoint(event.GetPosition());
+        dc.SetPen(wxNullPen);
+    }
 }

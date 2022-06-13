@@ -2,11 +2,11 @@
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
     EVT_MENU(wxID_EXIT, MainFrame::OnExit)
-        EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
-            EVT_MENU(ID_USAGEGUIDE, MainFrame::OnUsageGuide)
-                wxEND_EVENT_TABLE()
+    EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
+    EVT_MENU(ID_USAGEGUIDE, MainFrame::OnUsageGuide)
+wxEND_EVENT_TABLE()
 
-                    MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
+MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
     : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
 
