@@ -1,6 +1,7 @@
 #ifndef MAINFRAME_H
 #define MAINFRAME_H
 
+#include "constants.h"
 #include "panels.h"
 
 #include <wx/wx.h>
@@ -32,10 +33,6 @@ private:
     void OnAbout(wxCommandEvent &event);
     void OnUsageGuide(wxCommandEvent &event);
     wxDECLARE_EVENT_TABLE();
-};
-enum
-{
-    ID_USAGEGUIDE = 1
 };
 
 #endif
