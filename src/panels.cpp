@@ -77,6 +77,8 @@ wxBEGIN_EVENT_TABLE(EnvironmentGeometryPanel, wxPanel)
     EVT_SIZE(EnvironmentGeometryPanel::OnSize)
     EVT_ERASE_BACKGROUND(EnvironmentGeometryPanel::OnErase)
     EVT_MOTION(EnvironmentGeometryPanel::OnMotion)
+    EVT_LEFT_DOWN(EnvironmentGeometryPanel::OnLeftMouseClicked)
+    EVT_RIGHT_DOWN(EnvironmentGeometryPanel::OnRightMouseClicked)
 wxEND_EVENT_TABLE()
 
 EnvironmentGeometryPanel::EnvironmentGeometryPanel(wxPanel *parent)
@@ -135,7 +137,6 @@ void EnvironmentGeometryPanel::OnMotion(wxMouseEvent& event)
     {
         int x, y;
         event.GetPosition(&x, &y);
-        wxPen pen(wxColor(0,0,0), 10 ); // black pen of width 10
 
         // we need 2 different DC here
         // wxClientDC for visualization
@@ -144,8 +145,16 @@ void EnvironmentGeometryPanel::OnMotion(wxMouseEvent& event)
         wxMemoryDC mdc(environmentDrawing);
 
         mdc.SelectObject(environmentDrawing);
-        cdc.SetBrush(wxColor(0,0,0)); // black filling
-        cdc.SetPen(pen);
+        if (isLeftMouseClicked)
+        {
+            cdc.SetPen(wxPen(wxColor(0,0,0), 10));
+            cdc.SetBrush(wxColor(0,0,0)); // black filling
+        }
+        else
+        {
+            cdc.SetPen(wxPen(wxColor(255,255,255), 10));
+            cdc.SetBrush(wxColor(255,255,255)); // white filling
+        } 
         mdc.SetBrush(cdc.GetBrush());
         mdc.SetPen(cdc.GetPen());
 
@@ -156,4 +165,15 @@ void EnvironmentGeometryPanel::OnMotion(wxMouseEvent& event)
         mdc.SetPen(wxNullPen);
         mdc.SelectObject(wxNullBitmap);
     }
+}
+
+
+void EnvironmentGeometryPanel::OnLeftMouseClicked(wxMouseEvent& event)
+{
+    isLeftMouseClicked = true;
+}
+
+void EnvironmentGeometryPanel::OnRightMouseClicked(wxMouseEvent& event)
+{
+    isLeftMouseClicked = false;
 }

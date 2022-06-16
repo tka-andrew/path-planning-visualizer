@@ -46,6 +46,8 @@ public:
     void OnErase(wxEraseEvent& event);
     void paintNow(); // actually doesnt need this
     void OnMotion(wxMouseEvent& event);
+    void OnLeftMouseClicked(wxMouseEvent& event);
+    void OnRightMouseClicked(wxMouseEvent& event);
     void OnSize(wxSizeEvent& event);
     void render(wxDC& dc);
     wxDECLARE_EVENT_TABLE();
@@ -53,6 +55,7 @@ private:
     int clientAreaWidth = 10; // dummy value, will be updated OnResize()
     int clientAreaHeight = 10; // dummy value, will be updated OnResize()
     bool initialSizeTaken = false;
+    bool isLeftMouseClicked = true;
 };
 
 const int ID_DEFINE_ENVIRONMENT = 101;
