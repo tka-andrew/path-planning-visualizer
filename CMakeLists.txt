@@ -22,6 +22,7 @@ set(Sources
     src/main.cpp
     src/mainFrame.cpp
     src/panels.cpp
+    src/environmentPanel.cpp
 )
 
 # add the executable
@@ -48,6 +49,10 @@ endif()
 if(NOT EXISTS "${PROJECT_SOURCE_DIR}/thirdparty/googletest/CMakeLists.txt")
     message(FATAL_ERROR "The googletest submodule was not downloaded! GIT_SUBMODULE was turned off or failed!")
 endif()
+
+# FIND OPENCV
+find_package( OpenCV REQUIRED )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
 
 # REFERENCE: https://docs.wxwidgets.org/trunk/overview_cmake.html
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} ${OpenCV_LIBS})

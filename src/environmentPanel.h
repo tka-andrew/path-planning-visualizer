@@ -12,8 +12,10 @@ class EnvironmentGeometryPanel : public wxPanel
 public:
     EnvironmentGeometryPanel(wxPanel *parent);
     wxPanel *m_parent;
-    wxButton *m_uploadImage;
+    wxButton *m_resetDrawing;
     wxBitmap environmentDrawing;
+
+    void OnResetDrawing(wxCommandEvent &event);
 
     // REFERENCE: https://wiki.wxwidgets.org/Drawing_on_a_panel_with_a_DC
     // REFERENCE: https://www.informit.com/articles/article.aspx?p=405047
