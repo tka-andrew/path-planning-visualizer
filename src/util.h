@@ -4,6 +4,10 @@
 #include <wx/wx.h>
 #include <opencv2/opencv.hpp>
 
-cv::Mat mat_from_wxbitmap(wxBitmap &bitmap);
+namespace OpenCV_wxWidgets {
+    
+    cv::Mat mat_from_wxbitmap(wxBitmap &bitmap);
+
+}
 
 #endif

@@ -1,5 +1,8 @@
 #include "mainFrame.h"
 #include "panels.h"
+#include "util.h"
+
+#include <opencv2/opencv.hpp>
 
 LeftPanel::LeftPanel(wxPanel *parent)
     : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(200, 200), wxBORDER_SUNKEN)
@@ -60,6 +63,9 @@ void LeftPanel::OnDefineRobot(wxCommandEvent &WXUNUSED(event))
 void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    wxBitmap robotDrawing = wxBitmap(mainFrame->m_robotGeometryPanel->m_drawing);
+    cv::Mat image = OpenCV_wxWidgets::mat_from_wxbitmap(robotDrawing);
+    cv::imshow("test", image);
     if (mainFrame->currentPanel != 3)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
