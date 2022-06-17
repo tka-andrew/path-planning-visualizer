@@ -23,6 +23,8 @@ set(Sources
     src/mainFrame.cpp
     src/panels.cpp
     src/environmentPanel.cpp
+    src/robotPanel.cpp
+    src/DrawingPanel.cpp
 )
 
 # add the executable

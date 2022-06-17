@@ -17,10 +17,12 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     m_lp = new LeftPanel(m_parent);
     m_pathFindingPanel = new PathFindingPanel(m_parent);
     m_environmentGeometryPanel = new EnvironmentGeometryPanel(m_parent);
+    m_robotGeometryPanel = new RobotGeometryPanel(m_parent, ID_RESET_ROBOT);
 
     m_sizer->Add(m_lp, 0, wxSHAPED, 5);
     m_sizer->Add(m_environmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
     m_pathFindingPanel->Hide();
+    m_robotGeometryPanel->Hide();
 
     m_parent->SetSizer(m_sizer);
 
@@ -67,12 +69,21 @@ void MainFrame::switchPanel(int panelNum)
     case 1:
         m_sizer->Detach(1); // remove panel 1, which is the right panel
         m_pathFindingPanel->Hide();
+        m_robotGeometryPanel->Hide();
         m_sizer->Add(m_environmentGeometryPanel, 1, wxGROW);
         m_environmentGeometryPanel->Show();
+        break;
+    case 2:
+        m_sizer->Detach(1); // remove panel 1, which is the right panel
+        m_environmentGeometryPanel->Hide();
+        m_pathFindingPanel->Hide();
+        m_sizer->Add(m_robotGeometryPanel, 1, wxGROW);
+        m_robotGeometryPanel->Show();
         break;
     case 3:
         m_sizer->Detach(1); // remove panel 1, which is the right panel
         m_environmentGeometryPanel->Hide();
+        m_robotGeometryPanel->Hide();
         m_sizer->Add(m_pathFindingPanel, 1, wxGROW);
         m_pathFindingPanel->Show();
         break;

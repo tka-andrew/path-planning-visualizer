@@ -19,13 +19,10 @@ public:
     LeftPanel *m_lp;
     PathFindingPanel *m_pathFindingPanel;
     EnvironmentGeometryPanel *m_environmentGeometryPanel;
+    RobotGeometryPanel *m_robotGeometryPanel;
     wxPanel *m_parent;
     wxBoxSizer *m_sizer;
     int currentPanel = 1;
-    std::array<int, 2> startingPoint = {-1, -1};
-    std::array<int, 2> destinationPoint = {-1, -1};
-    bool startingPointDefined = false;
-    bool destinationPointDefined = false;
     void switchPanel(int panelNum);
 
 private:

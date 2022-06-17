@@ -6,20 +6,19 @@ LeftPanel::LeftPanel(wxPanel *parent)
 {
     m_parent = parent;
     m_defineEnvironment = new wxButton(this, ID_DEFINE_ENVIRONMENT, wxT("Define environment"));
+    m_defineRobot = new wxButton(this, ID_DEFINE_ROBOT, wxT("Define robot"));
     m_pathFinding = new wxButton(this, ID_PATHFINDING, wxT("Path finding"));
-
-    // REFERENCE: https://forums.wxwidgets.org/viewtopic.php?t=43787
-    // wxST_NO_AUTORESIZE flag is added to prevent it from auto-sizing
-    m_startingPoint = new wxStaticText(this, wxID_ANY, "Starting Point:\nundefined", wxPoint(10, 400), wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
-    m_destinationPoint = new wxStaticText(this, wxID_ANY, "Destination Point:\nundefined", wxPoint(10, 500), wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
 
     Connect(ID_DEFINE_ENVIRONMENT, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnDefineEnvironment));
+    Connect(ID_DEFINE_ROBOT, wxEVT_COMMAND_BUTTON_CLICKED,
+            wxCommandEventHandler(LeftPanel::OnDefineRobot));
     Connect(ID_PATHFINDING, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnPathFinding));
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(m_defineEnvironment, 0, wxEXPAND, 0);
+    sizer->Add(m_defineRobot, 0, wxEXPAND, 0);
     sizer->Add(m_pathFinding, 0, wxEXPAND, 0);
     sizer->SetSizeHints(this);
     this->SetSizer(sizer);
@@ -32,6 +31,16 @@ void LeftPanel::OnDefineEnvironment(wxCommandEvent &WXUNUSED(event))
     {
         mainFrame->switchPanel(1);
         mainFrame->currentPanel = 1;
+    }
+}
+
+void LeftPanel::OnDefineRobot(wxCommandEvent &WXUNUSED(event))
+{
+    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    if (mainFrame->currentPanel != 1)
+    {
+        mainFrame->switchPanel(2);
+        mainFrame->currentPanel = 2;
     }
 }
 

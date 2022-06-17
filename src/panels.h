@@ -3,6 +3,7 @@
 
 #include "constants.h"
 #include "environmentPanel.h"
+#include "robotPanel.h"
 
 #include <wx/wx.h>
 #include <wx/panel.h>
@@ -13,11 +14,11 @@ class LeftPanel : public wxPanel
 public:
     LeftPanel(wxPanel *parent);
     void OnDefineEnvironment(wxCommandEvent &event);
+    void OnDefineRobot(wxCommandEvent &event);
     void OnPathFinding(wxCommandEvent &event);
     wxButton *m_defineEnvironment;
+    wxButton *m_defineRobot;
     wxButton *m_pathFinding;
-    wxStaticText *m_startingPoint;
-    wxStaticText *m_destinationPoint;
     wxPanel *m_parent;
 };
 
