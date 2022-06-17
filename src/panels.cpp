@@ -37,7 +37,7 @@ void LeftPanel::OnDefineEnvironment(wxCommandEvent &WXUNUSED(event))
 void LeftPanel::OnDefineRobot(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
-    if (mainFrame->currentPanel != 1)
+    if (mainFrame->currentPanel != 2)
     {
         mainFrame->switchPanel(2);
         mainFrame->currentPanel = 2;
