@@ -8,6 +8,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     m_defineEnvironment = new wxButton(this, ID_DEFINE_ENVIRONMENT, wxT("Define environment"));
     m_defineRobot = new wxButton(this, ID_DEFINE_ROBOT, wxT("Define robot"));
     m_pathFinding = new wxButton(this, ID_PATHFINDING, wxT("Path finding"));
+    m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200)); // initially first button is selected
 
     Connect(ID_DEFINE_ENVIRONMENT, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnDefineEnvironment));
@@ -29,6 +30,9 @@ void LeftPanel::OnDefineEnvironment(wxCommandEvent &WXUNUSED(event))
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     if (mainFrame->currentPanel != 1)
     {
+        m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200));
+        m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
+        m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
         mainFrame->switchPanel(1);
         mainFrame->currentPanel = 1;
     }
@@ -39,6 +43,9 @@ void LeftPanel::OnDefineRobot(wxCommandEvent &WXUNUSED(event))
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     if (mainFrame->currentPanel != 2)
     {
+        m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
+        m_defineRobot->SetBackgroundColour(wxColor(200,200,200));
+        m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
         mainFrame->switchPanel(2);
         mainFrame->currentPanel = 2;
     }
@@ -49,6 +56,9 @@ void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     if (mainFrame->currentPanel != 3)
     {
+        m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
+        m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
+        m_pathFinding->SetBackgroundColour(wxColor(200,200,200));
         mainFrame->switchPanel(3);
         mainFrame->currentPanel = 3;
     }
