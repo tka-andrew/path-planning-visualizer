@@ -33,6 +33,11 @@ DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
     m_drawing = wxBitmap(emptyImage);
 }
 
+void DrawingPanel::OnResetDrawing(wxCommandEvent &event)
+{
+    resetDrawing();
+}
+
 void DrawingPanel::resetDrawing()
 {
     wxImage emptyImage(clientAreaWidth, clientAreaHeight);
@@ -41,9 +46,14 @@ void DrawingPanel::resetDrawing()
     this->Refresh(); // to trigger refresh
 }
 
-void DrawingPanel::OnResetDrawing(wxCommandEvent &event)
+int DrawingPanel::getClientAreaHeight() 
 {
-    resetDrawing();
+    return clientAreaHeight;
+}
+
+int DrawingPanel::getClientAreaWidth() 
+{
+    return clientAreaWidth;
 }
 
 void DrawingPanel::OnSize(wxSizeEvent &evt)

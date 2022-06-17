@@ -17,6 +17,8 @@ public:
 
     void OnResetDrawing(wxCommandEvent &event);
     void resetDrawing();
+    int getClientAreaHeight();
+    int getClientAreaWidth();
 
     // REFERENCE: https://wiki.wxwidgets.org/Drawing_on_a_panel_with_a_DC
     // REFERENCE: https://www.informit.com/articles/article.aspx?p=405047

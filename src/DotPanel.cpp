@@ -49,6 +49,9 @@ void DotPanel::OnSize(wxSizeEvent &evt)
 {
     if (!initialSizeTaken)
     {
+        MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+        clientAreaHeight = mainFrame->m_environmentGeometryPanel->getClientAreaHeight();
+        clientAreaWidth = mainFrame->m_environmentGeometryPanel->getClientAreaWidth();
         this->resetDrawing();
         initialSizeTaken = true; // to ensure a fixed size bitmap
     }
@@ -63,10 +66,14 @@ void DotPanel::OnErase(wxEraseEvent &event)
 
 void DotPanel::OnLeftMouseClicked(wxMouseEvent &event)
 {
-    resetDrawing();
     int x, y;
     event.GetPosition(&x, &y);
+    
+    if (x>=clientAreaWidth || y>=clientAreaHeight || x<0 || y<0)
+        return;
 
+    resetDrawing();
+    
     dotPoseX = x;
     dotPoseY = y;
 
