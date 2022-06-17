@@ -28,7 +28,7 @@ void DotPanel::resetDrawing()
 
     wxBitmap environmentDrawing = wxBitmap(mainFrame->m_environmentGeometryPanel->m_drawing);
     wxImage environmentDrawing_img = environmentDrawing.ConvertToImage();
-    cv::Mat environmentImg = OpenCV_wxWidgets::mat_from_wxImage( environmentDrawing_img );
+    cv::Mat environmentImg = OpenCV_wxWidgets::cvMat_from_wxImage( environmentDrawing_img );
     cv::Mat environmentImg_gray;
     cv::cvtColor(environmentImg.clone(), environmentImg_gray, cv::COLOR_BGR2GRAY);
     cv::Mat environmentImg_thresh;
@@ -43,9 +43,9 @@ void DotPanel::resetDrawing()
     {
         cv::drawContours( drawing, contours, (int)i, cv::Scalar(255,0,255), contourRadius, cv::LINE_8 );
     }
-    cv::imshow( "Contours", drawing );
 
-    m_drawing = wxBitmap(mainFrame->m_environmentGeometryPanel->m_drawing);
+    wxImage m_img = OpenCV_wxWidgets::wxImage_from_cvMat(drawing);
+    m_drawing = wxBitmap(m_img);
     this->Refresh();
 }
 

@@ -66,7 +66,7 @@ void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     wxBitmap robotDrawing = wxBitmap(mainFrame->m_robotGeometryPanel->m_drawing);
     wxImage robotDrawing_img = robotDrawing.ConvertToImage();
-    cv::Mat robotImg = OpenCV_wxWidgets::mat_from_wxImage(robotDrawing_img);
+    cv::Mat robotImg = OpenCV_wxWidgets::cvMat_from_wxImage(robotDrawing_img);
     cv::Mat robotImg_gray;
     cv::cvtColor(robotImg.clone(), robotImg_gray, cv::COLOR_BGR2GRAY);
     cv::Mat robotImg_thresh;
