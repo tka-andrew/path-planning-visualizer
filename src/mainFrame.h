@@ -5,6 +5,7 @@
 #include "panels.h"
 #include "environmentPanel.h"
 #include "robotPanel.h"
+#include "DotPanel.h"
 
 #include <wx/wx.h>
 #include <wx/grid.h>
@@ -22,6 +23,7 @@ public:
     PathFindingPanel *m_pathFindingPanel;
     EnvironmentGeometryPanel *m_environmentGeometryPanel;
     RobotGeometryPanel *m_robotGeometryPanel;
+    DotPanel *m_startPosePanel;
     wxPanel *m_parent;
     wxBoxSizer *m_sizer;
     int currentPanel = 1;

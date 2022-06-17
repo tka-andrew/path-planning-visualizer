@@ -13,9 +13,12 @@ public:
     LeftPanel(wxPanel *parent);
     void OnDefineEnvironment(wxCommandEvent &event);
     void OnDefineRobot(wxCommandEvent &event);
+    void OnDefineStart(wxCommandEvent &event);
     void OnPathFinding(wxCommandEvent &event);
     wxButton *m_defineEnvironment;
     wxButton *m_defineRobot;
+    wxButton *m_defineStartPose;
+    wxButton *m_defineGoalPose;
     wxButton *m_pathFinding;
     wxPanel *m_parent;
 };
