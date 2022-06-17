@@ -91,6 +91,11 @@ void DrawingPanel::OnMotion(wxMouseEvent &event)
         int x, y;
         event.GetPosition(&x, &y);
 
+        if (x<=0 || x>=clientAreaWidth || y<=0 || y>=clientAreaHeight)
+        {
+            return;
+        }
+
         // we need 2 different DC here
         // wxClientDC for visualization
         // wxMemoryDC for updating the bitmap, so that later wxAutoBufferedPaintDC can draw it in OnPaint() function

@@ -65,7 +65,8 @@ void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     wxBitmap robotDrawing = wxBitmap(mainFrame->m_robotGeometryPanel->m_drawing);
-    cv::Mat robotImg = OpenCV_wxWidgets::mat_from_wxbitmap(robotDrawing);
+    wxImage robotDrawing_img = robotDrawing.ConvertToImage();
+    cv::Mat robotImg = OpenCV_wxWidgets::mat_from_wxImage(robotDrawing_img);
     cv::Mat robotImg_gray;
     cv::cvtColor(robotImg.clone(), robotImg_gray, cv::COLOR_BGR2GRAY);
     cv::Mat robotImg_thresh;
@@ -81,12 +82,6 @@ void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
             wxLogMessage("Please define the robot geometry first.");
         return;
     }
-    cv::Mat drawing = cv::Mat::ones( robotImg_gray.size(), CV_8UC3 );
-    for( size_t i = 0; i< contours.size(); i++ )
-    {
-        cv::drawContours( drawing, contours, (int)i, cv::Scalar(255,255,255), -1, cv::LINE_8, hierarchy, 0 );
-    }
-    cv::imshow( "Contours", drawing );
 
     float radius{0.0};
     cv::Point2f center;
