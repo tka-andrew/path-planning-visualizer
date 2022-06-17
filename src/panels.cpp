@@ -69,13 +69,13 @@ void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
     cv::Mat robotImg_gray;
     cv::cvtColor(robotImg.clone(), robotImg_gray, cv::COLOR_BGR2GRAY);
     cv::Mat robotImg_thresh;
-    cv::threshold(robotImg_gray, robotImg_thresh, 0, 100, 1);
+    cv::threshold(robotImg_gray, robotImg_thresh, 0, 127, cv::THRESH_BINARY_INV);
     std::vector<std::vector<cv::Point> > contours;
     std::vector<cv::Vec4i> hierarchy;
     cv::findContours(robotImg_thresh, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE );
     if (contours.size() != 1)
     {
-        if (contours.size() >0)
+        if (contours.size()>0)
             wxLogMessage("Please define one robot geometry only.");
         else
             wxLogMessage("Please define the robot geometry first.");
@@ -84,9 +84,15 @@ void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
     cv::Mat drawing = cv::Mat::ones( robotImg_gray.size(), CV_8UC3 );
     for( size_t i = 0; i< contours.size(); i++ )
     {
-        cv::drawContours( drawing, contours, (int)i, cv::Scalar(255,0,0), -1, cv::LINE_8, hierarchy, 0 );
+        cv::drawContours( drawing, contours, (int)i, cv::Scalar(255,255,255), -1, cv::LINE_8, hierarchy, 0 );
     }
     cv::imshow( "Contours", drawing );
+
+    float radius{0.0};
+    cv::Point2f center;
+    cv::minEnclosingCircle	(contours[0], center, radius);
+    mainFrame->m_robotGeometryPanel->m_robotBoundingRadius = ceil(radius);
+
     if (mainFrame->currentPanel != 3)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
