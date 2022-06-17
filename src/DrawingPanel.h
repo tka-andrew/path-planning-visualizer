@@ -25,6 +25,8 @@ public:
     void OnLeftMouseClicked(wxMouseEvent& event);
     void OnRightMouseClicked(wxMouseEvent& event);
     void OnSize(wxSizeEvent& event);
+    wxDECLARE_EVENT_TABLE();
+
 private:
     int clientAreaWidth = 10; // dummy value, will be updated OnResize()
     int clientAreaHeight = 10; // dummy value, will be updated OnResize()

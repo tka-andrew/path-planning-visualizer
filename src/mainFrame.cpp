@@ -16,7 +16,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 
     m_lp = new LeftPanel(m_parent);
     m_pathFindingPanel = new PathFindingPanel(m_parent);
-    m_environmentGeometryPanel = new EnvironmentGeometryPanel(m_parent);
+    m_environmentGeometryPanel = new EnvironmentGeometryPanel(m_parent, ID_RESET_ENVIRONMENT);
     m_robotGeometryPanel = new RobotGeometryPanel(m_parent, ID_RESET_ROBOT);
 
     m_sizer->Add(m_lp, 0, wxSHAPED, 5);

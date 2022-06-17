@@ -2,8 +2,6 @@
 #define PANELS_H
 
 #include "constants.h"
-#include "environmentPanel.h"
-#include "robotPanel.h"
 
 #include <wx/wx.h>
 #include <wx/panel.h>

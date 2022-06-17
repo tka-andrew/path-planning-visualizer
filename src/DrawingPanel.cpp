@@ -1,5 +1,14 @@
 #include "DrawingPanel.h"
 
+wxBEGIN_EVENT_TABLE(DrawingPanel, wxPanel)
+    EVT_PAINT(DrawingPanel::OnPaint)
+    EVT_SIZE(DrawingPanel::OnSize)
+    EVT_ERASE_BACKGROUND(DrawingPanel::OnErase)
+    EVT_MOTION(DrawingPanel::OnMotion)
+    EVT_LEFT_DOWN(DrawingPanel::OnLeftMouseClicked)
+    EVT_RIGHT_DOWN(DrawingPanel::OnRightMouseClicked)
+wxEND_EVENT_TABLE()
+
 DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition,
               wxSize(-1, -1), wxBORDER_SUNKEN)

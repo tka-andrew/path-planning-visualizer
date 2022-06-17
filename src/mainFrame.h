@@ -3,6 +3,8 @@
 
 #include "constants.h"
 #include "panels.h"
+#include "environmentPanel.h"
+#include "robotPanel.h"
 
 #include <wx/wx.h>
 #include <wx/grid.h>
