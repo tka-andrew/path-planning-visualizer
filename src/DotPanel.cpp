@@ -36,15 +36,20 @@ void DotPanel::resetDrawing()
     std::vector<std::vector<cv::Point> > contours;
     std::vector<cv::Vec4i> hierarchy;
     cv::findContours(environmentImg_thresh, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE );
-    cv::Mat drawing = cv::Mat::ones( environmentImg_gray.size(), CV_8UC3 );
+    cv::Mat originalThresh = cv::Mat::zeros( environmentImg_gray.size(), CV_8UC3 );
+    cv::Mat cspace = cv::Mat::zeros( environmentImg_gray.size(), CV_8UC3 );
     float contourRadius = mainFrame->m_robotGeometryPanel->m_robotBoundingRadius;
     contourRadius += contourRadius/2; // the contour is actually drawn along the edge of contour, so we need extra half of it
     for( size_t i = 0; i< contours.size(); i++ )
     {
-        cv::drawContours( drawing, contours, (int)i, cv::Scalar(255,0,255), contourRadius, cv::LINE_8 );
+        cv::drawContours( originalThresh, contours, (int)i, cv::Scalar(255,255,255), -1, cv::LINE_8 );
+        cv::drawContours( cspace, contours, (int)i, cv::Scalar(255,255,255), contourRadius, cv::LINE_8 );
     }
 
-    wxImage m_img = OpenCV_wxWidgets::wxImage_from_cvMat(drawing);
+    cv::bitwise_or(originalThresh, cspace, cspace);
+    cv::bitwise_not(cspace, cspace);
+
+    wxImage m_img = OpenCV_wxWidgets::wxImage_from_cvMat(cspace);
     m_drawing = wxBitmap(m_img);
     this->Refresh();
 }
