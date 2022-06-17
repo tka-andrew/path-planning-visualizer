@@ -33,12 +33,17 @@ DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
     m_drawing = wxBitmap(emptyImage);
 }
 
-void DrawingPanel::OnResetDrawing(wxCommandEvent &event)
+void DrawingPanel::resetDrawing()
 {
     wxImage emptyImage(clientAreaWidth, clientAreaHeight);
     emptyImage.Clear(255); // default white color
     m_drawing = wxBitmap(emptyImage);
     this->Refresh(); // to trigger refresh
+}
+
+void DrawingPanel::OnResetDrawing(wxCommandEvent &event)
+{
+    resetDrawing();
 }
 
 void DrawingPanel::OnSize(wxSizeEvent &evt)

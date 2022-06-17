@@ -9,6 +9,7 @@ class RobotGeometryPanel : public DrawingPanel
 public:
     // REFERENCE: https://stackoverflow.com/questions/347358/inheriting-constructors
     using DrawingPanel::DrawingPanel;
+    virtual void OnLeftMouseClicked(wxMouseEvent& event) override;
 };
 
 #endif
