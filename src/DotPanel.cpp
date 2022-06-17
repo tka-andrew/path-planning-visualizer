@@ -1,5 +1,8 @@
 #include "mainFrame.h"
 #include "DotPanel.h"
+#include "util.h"
+
+#include <opencv2/opencv.hpp>
 
 wxBEGIN_EVENT_TABLE(DotPanel, wxPanel)
     EVT_PAINT(DotPanel::OnPaint)
@@ -22,6 +25,26 @@ DotPanel::DotPanel(wxPanel *parent, wxColor dotColor)
 void DotPanel::resetDrawing()
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+
+    wxBitmap environmentDrawing = wxBitmap(mainFrame->m_environmentGeometryPanel->m_drawing);
+    wxImage environmentDrawing_img = environmentDrawing.ConvertToImage();
+    cv::Mat environmentImg = OpenCV_wxWidgets::mat_from_wxImage( environmentDrawing_img );
+    cv::Mat environmentImg_gray;
+    cv::cvtColor(environmentImg.clone(), environmentImg_gray, cv::COLOR_BGR2GRAY);
+    cv::Mat environmentImg_thresh;
+    cv::threshold(environmentImg_gray, environmentImg_thresh, 0, 127, cv::THRESH_BINARY_INV);
+    std::vector<std::vector<cv::Point> > contours;
+    std::vector<cv::Vec4i> hierarchy;
+    cv::findContours(environmentImg_thresh, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE );
+    cv::Mat drawing = cv::Mat::ones( environmentImg_gray.size(), CV_8UC3 );
+    float contourRadius = mainFrame->m_robotGeometryPanel->m_robotBoundingRadius;
+    contourRadius += contourRadius/2; // the contour is actually drawn along the edge of contour, so we need extra half of it
+    for( size_t i = 0; i< contours.size(); i++ )
+    {
+        cv::drawContours( drawing, contours, (int)i, cv::Scalar(255,0,255), contourRadius, cv::LINE_8 );
+    }
+    cv::imshow( "Contours", drawing );
+
     m_drawing = wxBitmap(mainFrame->m_environmentGeometryPanel->m_drawing);
     this->Refresh();
 }
