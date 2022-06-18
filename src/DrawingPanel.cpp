@@ -6,7 +6,9 @@ wxBEGIN_EVENT_TABLE(DrawingPanel, wxPanel)
     EVT_ERASE_BACKGROUND(DrawingPanel::OnErase)
     EVT_MOTION(DrawingPanel::OnMotion)
     EVT_LEFT_DOWN(DrawingPanel::OnLeftMouseClicked)
+    EVT_LEFT_UP(DrawingPanel::OnLeftMouseUp)
     EVT_RIGHT_DOWN(DrawingPanel::OnRightMouseClicked)
+    EVT_RIGHT_UP(DrawingPanel::OnRightMouseUp)
 wxEND_EVENT_TABLE()
 
 DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
@@ -130,7 +132,15 @@ void DrawingPanel::OnLeftMouseClicked(wxMouseEvent &event)
     isLeftMouseClicked = true;
 }
 
+void DrawingPanel::OnLeftMouseUp(wxMouseEvent &event)
+{
+}
+
 void DrawingPanel::OnRightMouseClicked(wxMouseEvent &event)
 {
     isLeftMouseClicked = false;
+}
+
+void DrawingPanel::OnRightMouseUp(wxMouseEvent &event)
+{
 }

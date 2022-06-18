@@ -26,7 +26,9 @@ public:
     void OnErase(wxEraseEvent& event);
     void OnMotion(wxMouseEvent& event);
     virtual void OnLeftMouseClicked(wxMouseEvent& event);
+    virtual void OnLeftMouseUp(wxMouseEvent& event);
     void OnRightMouseClicked(wxMouseEvent& event);
+    virtual void OnRightMouseUp(wxMouseEvent& event);
     void OnSize(wxSizeEvent& event);
     wxDECLARE_EVENT_TABLE();
 

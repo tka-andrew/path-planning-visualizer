@@ -1,9 +1,5 @@
 #include "mainFrame.h"
 #include "leftPanel.h"
-#include "util.h"
-
-#include <opencv2/opencv.hpp>
-#include <vector>
 
 LeftPanel::LeftPanel(wxPanel *parent)
     : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(200, 200), wxBORDER_SUNKEN)
@@ -75,29 +71,12 @@ void LeftPanel::OnDefineRobot(wxCommandEvent &WXUNUSED(event))
 void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
-    wxBitmap robotDrawing = wxBitmap(mainFrame->m_robotGeometryPanel->m_drawing);
-    wxImage robotDrawing_img = robotDrawing.ConvertToImage();
-    cv::Mat robotImg = OpenCV_wxWidgets::cvMat_from_wxImage(robotDrawing_img);
-    cv::Mat robotImg_gray;
-    cv::cvtColor(robotImg.clone(), robotImg_gray, cv::COLOR_BGR2GRAY);
-    cv::Mat robotImg_thresh;
-    cv::threshold(robotImg_gray, robotImg_thresh, 0, 127, cv::THRESH_BINARY_INV);
-    std::vector<std::vector<cv::Point> > contours;
-    std::vector<cv::Vec4i> hierarchy;
-    cv::findContours(robotImg_thresh, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE );
-    if (contours.size() != 1)
+
+    if (mainFrame->m_robotGeometryPanel->m_robotBoundingRadius == -1)
     {
-        if (contours.size()>0)
-            wxLogMessage("Please define one robot geometry only.");
-        else
-            wxLogMessage("Please define the robot geometry first.");
+        wxLogMessage("Please define a valid robot geometry first.");
         return;
     }
-
-    float radius{0.0};
-    cv::Point2f center;
-    cv::minEnclosingCircle	(contours[0], center, radius);
-    mainFrame->m_robotGeometryPanel->m_robotBoundingRadius = ceil(radius);
 
     if (mainFrame->currentPanel != 3)
     {
@@ -114,6 +93,13 @@ void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
 void LeftPanel::OnDefineGoal(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+
+    if (mainFrame->m_robotGeometryPanel->m_robotBoundingRadius == -1)
+    {
+        wxLogMessage("Please define a valid robot geometry first.");
+        return;
+    }
+
     int startPoseX = mainFrame->m_startPosePanel->dotPoseX;
     int startPoseY = mainFrame->m_startPosePanel->dotPoseY; 
     if (startPoseX == -1 || startPoseY == -1)

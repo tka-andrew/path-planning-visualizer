@@ -29,6 +29,7 @@ public:
     wxPanel *m_parent;
     wxBoxSizer *m_sizer;
     int currentPanel = 1;
+    bool canSwitchPanel();
     void switchPanel(int panelNum);
 
 private:
