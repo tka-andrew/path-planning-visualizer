@@ -87,14 +87,18 @@ void MainFrame::switchPanel(int panelNum)
         break;
     case 3:
         m_sizer->Add(m_startPosePanel, 1, wxGROW);
+        m_startPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         m_startPosePanel->Show();
         break;
     case 4:
         m_sizer->Add(m_goalPosePanel, 1, wxGROW);
+        m_goalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         m_goalPosePanel->Show();
         break;
     case 5:
         m_sizer->Add(m_simpleDecompositionPanel, 1, wxGROW);
+        m_goalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
+        m_simpleDecompositionPanel->simpleCellDecomposition(); // update the grid
         m_simpleDecompositionPanel->Show();
         break;
     }
