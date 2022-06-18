@@ -24,6 +24,7 @@ public:
     EnvironmentGeometryPanel *m_environmentGeometryPanel;
     RobotGeometryPanel *m_robotGeometryPanel;
     DotPanel *m_startPosePanel;
+    DotPanel *m_goalPosePanel;
     wxPanel *m_parent;
     wxBoxSizer *m_sizer;
     int currentPanel = 1;

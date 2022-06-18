@@ -12,6 +12,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     m_defineEnvironment = new wxButton(this, ID_DEFINE_ENVIRONMENT, wxT("Define environment"));
     m_defineRobot = new wxButton(this, ID_DEFINE_ROBOT, wxT("Define robot"));
     m_defineStartPose = new wxButton(this, ID_DEFINE_START, wxT("Define Start"));
+    m_defineGoalPose = new wxButton(this, ID_DEFINE_GOAL, wxT("Define Goal"));
     m_pathFinding = new wxButton(this, ID_PATHFINDING, wxT("Path finding"));
     m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200)); // initially first button is selected
 
@@ -21,6 +22,8 @@ LeftPanel::LeftPanel(wxPanel *parent)
             wxCommandEventHandler(LeftPanel::OnDefineRobot));
     Connect(ID_DEFINE_START, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnDefineStart));
+    Connect(ID_DEFINE_GOAL, wxEVT_COMMAND_BUTTON_CLICKED,
+            wxCommandEventHandler(LeftPanel::OnDefineGoal));
     Connect(ID_PATHFINDING, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnPathFinding));
 
@@ -28,6 +31,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     sizer->Add(m_defineEnvironment, 0, wxEXPAND, 0);
     sizer->Add(m_defineRobot, 0, wxEXPAND, 0);
     sizer->Add(m_defineStartPose, 0, wxEXPAND, 0);
+    sizer->Add(m_defineGoalPose, 0, wxEXPAND, 0);
     sizer->Add(m_pathFinding, 0, wxEXPAND, 0);
     sizer->SetSizeHints(this);
     this->SetSizer(sizer);
@@ -41,6 +45,7 @@ void LeftPanel::OnDefineEnvironment(wxCommandEvent &WXUNUSED(event))
         m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200));
         m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
         m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
+        m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
         m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
         mainFrame->switchPanel(1);
         mainFrame->currentPanel = 1;
@@ -55,6 +60,7 @@ void LeftPanel::OnDefineRobot(wxCommandEvent &WXUNUSED(event))
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
         m_defineRobot->SetBackgroundColour(wxColor(200,200,200));
         m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
+        m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
         m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
         mainFrame->switchPanel(2);
         mainFrame->currentPanel = 2;
@@ -93,9 +99,33 @@ void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
         m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
         m_defineStartPose->SetBackgroundColour(wxColor(200,200,200));
+        m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
         m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
         mainFrame->switchPanel(3);
         mainFrame->currentPanel = 3;
+    }
+}
+
+void LeftPanel::OnDefineGoal(wxCommandEvent &WXUNUSED(event))
+{
+    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    int startPoseX = mainFrame->m_startPosePanel->dotPoseX;
+    int startPoseY = mainFrame->m_startPosePanel->dotPoseY; 
+    if (startPoseX == -1 || startPoseY == -1)
+    {
+        wxLogMessage("Please define start pose first.");
+        return;
+    }
+
+    if (mainFrame->currentPanel != 4)
+    {
+        m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
+        m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
+        m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
+        m_defineGoalPose->SetBackgroundColour(wxColor(200,200,200));
+        m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
+        mainFrame->switchPanel(4);
+        mainFrame->currentPanel = 4;
     }
 }
 
@@ -107,6 +137,7 @@ void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
         m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
         m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
+        m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
         m_pathFinding->SetBackgroundColour(wxColor(200,200,200));
         mainFrame->switchPanel(5);
         mainFrame->currentPanel = 5;

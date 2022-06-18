@@ -14,6 +14,7 @@ public:
     void OnDefineEnvironment(wxCommandEvent &event);
     void OnDefineRobot(wxCommandEvent &event);
     void OnDefineStart(wxCommandEvent &event);
+    void OnDefineGoal(wxCommandEvent &event);
     void OnPathFinding(wxCommandEvent &event);
     wxButton *m_defineEnvironment;
     wxButton *m_defineRobot;
