@@ -7,15 +7,19 @@
 SimpleDecompositionPanel::SimpleDecompositionPanel(wxPanel *parent, int gridRow, int gridCol, int gridRowSize, int gridColSize)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(-1, -1), wxBORDER_SUNKEN)
 {
-    m_parent = parent;
-
-    // Create a wxGrid object
-    grid = new wxGrid(this, wxID_ANY);
-
+    this->m_parent = parent;
     this->gridRow = gridRow;
     this->gridCol = gridCol;
     this->gridRowSize = gridRowSize;
     this->gridColSize = gridColSize;
+
+    this->resetAndLayoutGrid();
+}
+
+void SimpleDecompositionPanel::resetAndLayoutGrid()
+{
+    // Create a wxGrid object
+    grid = new wxGrid(this, wxID_ANY);
 
     // This 2 lines must be executed before CreateGrid()
     grid->SetDefaultColSize(this->gridRowSize);
@@ -55,6 +59,7 @@ bool hasObstacle(cv::Mat &roi)
 
 void SimpleDecompositionPanel::simpleCellDecomposition()
 {
+    this->resetAndLayoutGrid(); // reset the grid in case any changes
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     wxBitmap cspace = wxBitmap(mainFrame->m_goalPosePanel->m_cspace);
     wxImage cspace_img = cspace.ConvertToImage();
