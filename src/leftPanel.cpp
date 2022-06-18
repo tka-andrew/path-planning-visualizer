@@ -143,9 +143,25 @@ void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
         return;
     }
 
+    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+
+    int startPoseX = mainFrame->m_startPosePanel->dotPoseX;
+    int startPoseY = mainFrame->m_startPosePanel->dotPoseY; 
+    if (startPoseX == -1 || startPoseY == -1)
+    {
+        wxLogMessage("Please define start pose & goal pose first.");
+        return;
+    }
+    int goalPoseX = mainFrame->m_goalPosePanel->dotPoseX;
+    int goalPoseY = mainFrame->m_goalPosePanel->dotPoseY; 
+    if ( goalPoseX == -1 || goalPoseY == -1)
+    {
+        wxLogMessage("Please define goal pose first.");
+        return;
+    }
+
     auto decompositionSelected = this->m_decompositionSelection->GetStringSelection();
 
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     if (decompositionSelected == wxString("Simple Cell Decomposition") && mainFrame->currentPanel != 5)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));

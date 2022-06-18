@@ -10,12 +10,15 @@ class SimpleDecompositionPanel : public wxPanel
 {
 public:
     SimpleDecompositionPanel(wxPanel *parent, int gridRow = 40, int gridCol = 60, int gridRowSize = 20, int gridColSize = 20);
+    void simpleCellDecomposition();
     wxGrid *grid;
     wxPanel *m_parent;
     int gridRow;
     int gridCol;
     int gridRowSize;
     int gridColSize;
+private:
+    bool initialSizeTaken = false;
 };
 
 #endif // SIMPLE_DECOMPOSITION_PANEL_H
