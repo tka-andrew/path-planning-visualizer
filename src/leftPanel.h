@@ -1,5 +1,5 @@
-#ifndef PANELS_H
-#define PANELS_H
+#ifndef LEFT_PANEL_H
+#define LEFT_PANEL_H
 
 #include "constants.h"
 
@@ -23,4 +23,4 @@ public:
     wxPanel *m_parent;
 };
 
-#endif // PANELS_H
+#endif // LEFT_PANEL_H

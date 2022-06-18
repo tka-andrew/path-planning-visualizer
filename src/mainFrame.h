@@ -2,7 +2,7 @@
 #define MAINFRAME_H
 
 #include "constants.h"
-#include "panels.h"
+#include "leftPanel.h"
 #include "environmentPanel.h"
 #include "robotPanel.h"
 #include "DotPanel.h"

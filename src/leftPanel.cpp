@@ -1,5 +1,5 @@
 #include "mainFrame.h"
-#include "panels.h"
+#include "leftPanel.h"
 #include "util.h"
 
 #include <opencv2/opencv.hpp>

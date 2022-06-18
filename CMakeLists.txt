@@ -21,7 +21,7 @@ include(${wxWidgets_USE_FILE})
 set(Sources
     src/main.cpp
     src/mainFrame.cpp
-    src/panels.cpp
+    src/leftPanel.cpp
     src/environmentPanel.cpp
     src/robotPanel.cpp
     src/DrawingPanel.cpp

@@ -9,7 +9,6 @@ set (Sources
 
 set (SourcesToBeTested
     ${CMAKE_SOURCE_DIR}/src/mainFrame.cpp
-    ${CMAKE_SOURCE_DIR}/src/panels.cpp
 )
 
 set (HeaderDirectoryToBeTested
