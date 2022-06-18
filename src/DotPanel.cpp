@@ -60,7 +60,8 @@ void DotPanel::resetDrawing()
     cv::bitwise_not(cspace, cspace);
 
     wxImage m_img = OpenCV_wxWidgets::wxImage_from_cvMat(cspace);
-    m_drawing = wxBitmap(m_img);
+    m_cspace = wxBitmap(m_img);
+    m_drawing = wxBitmap(m_cspace);
     this->Refresh();
 }
 

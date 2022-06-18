@@ -12,6 +12,7 @@ class DotPanel : public wxPanel
 public:
     DotPanel(wxPanel *parent, wxColor dotColor);
     wxPanel *m_parent;
+    wxBitmap m_cspace;
     wxBitmap m_drawing;
     wxColor m_dotColor;
     int dotPoseX = -1;
