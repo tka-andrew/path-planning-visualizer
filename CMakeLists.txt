@@ -26,6 +26,7 @@ set(Sources
     src/robotPanel.cpp
     src/DrawingPanel.cpp
     src/DotPanel.cpp
+    src/simpleDecompositionPanel.cpp
     src/util.cpp
 )
 

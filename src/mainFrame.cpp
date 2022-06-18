@@ -15,18 +15,18 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     m_sizer = new wxBoxSizer(wxHORIZONTAL);
 
     m_lp = new LeftPanel(m_parent);
-    m_pathFindingPanel = new PathFindingPanel(m_parent);
     m_environmentGeometryPanel = new EnvironmentGeometryPanel(m_parent, ID_RESET_ENVIRONMENT);
     m_robotGeometryPanel = new RobotGeometryPanel(m_parent, ID_RESET_ROBOT);
     m_startPosePanel = new DotPanel(m_parent, wxColor(0,255,0));
     m_goalPosePanel = new DotPanel(m_parent, wxColor(255,0,0));
+    m_simpleDecompositionPanel = new SimpleDecompositionPanel(m_parent);
 
     m_sizer->Add(m_lp, 0, wxSHAPED, 5);
     m_sizer->Add(m_environmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
-    m_pathFindingPanel->Hide();
     m_robotGeometryPanel->Hide();
     m_startPosePanel->Hide();
     m_goalPosePanel->Hide();
+    m_simpleDecompositionPanel->Hide();
 
     m_parent->SetSizer(m_sizer);
 
@@ -73,7 +73,7 @@ void MainFrame::switchPanel(int panelNum)
     m_robotGeometryPanel->Hide();
     m_startPosePanel->Hide();
     m_goalPosePanel->Hide();
-    m_pathFindingPanel->Hide();
+    m_simpleDecompositionPanel->Hide();
 
     switch (panelNum)
     {
@@ -96,8 +96,8 @@ void MainFrame::switchPanel(int panelNum)
         m_goalPosePanel->Show();
         break;
     case 5:
-        m_sizer->Add(m_pathFindingPanel, 1, wxGROW);
-        m_pathFindingPanel->Show();
+        m_sizer->Add(m_simpleDecompositionPanel, 1, wxGROW);
+        m_simpleDecompositionPanel->Show();
         break;
     }
     m_sizer->Layout();

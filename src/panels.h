@@ -4,8 +4,6 @@
 #include "constants.h"
 
 #include <wx/wx.h>
-#include <wx/panel.h>
-#include <wx/grid.h>
 
 class LeftPanel : public wxPanel
 {
@@ -21,16 +19,8 @@ public:
     wxButton *m_defineStartPose;
     wxButton *m_defineGoalPose;
     wxButton *m_pathFinding;
+    wxComboBox *m_decompositionSelection;
     wxPanel *m_parent;
 };
 
-class PathFindingPanel : public wxPanel
-{
-public:
-    PathFindingPanel(wxPanel *parent);
-    wxGrid *grid;
-    wxPanel *m_parent;
-    int gridRow = 40;
-    int gridCol = 60;
-};
 #endif // PANELS_H

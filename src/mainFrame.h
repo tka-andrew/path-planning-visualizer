@@ -6,6 +6,7 @@
 #include "environmentPanel.h"
 #include "robotPanel.h"
 #include "DotPanel.h"
+#include "simpleDecompositionPanel.h"
 
 #include <wx/wx.h>
 #include <wx/grid.h>
@@ -20,11 +21,11 @@ class MainFrame : public wxFrame
 public:
     MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
     LeftPanel *m_lp;
-    PathFindingPanel *m_pathFindingPanel;
     EnvironmentGeometryPanel *m_environmentGeometryPanel;
     RobotGeometryPanel *m_robotGeometryPanel;
     DotPanel *m_startPosePanel;
     DotPanel *m_goalPosePanel;
+    SimpleDecompositionPanel *m_simpleDecompositionPanel;
     wxPanel *m_parent;
     wxBoxSizer *m_sizer;
     int currentPanel = 1;

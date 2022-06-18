@@ -16,6 +16,10 @@ LeftPanel::LeftPanel(wxPanel *parent)
     m_pathFinding = new wxButton(this, ID_PATHFINDING, wxT("Path finding"));
     m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200)); // initially first button is selected
 
+    wxArrayString decompositionChoices;
+    decompositionChoices.Add(wxT("Simple Cell Decomposition"));
+    m_decompositionSelection = new wxComboBox(this, ID_DECOMPOSTION_SELECTION, "", wxDefaultPosition, wxSize(100, -1), decompositionChoices);
+
     Connect(ID_DEFINE_ENVIRONMENT, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnDefineEnvironment));
     Connect(ID_DEFINE_ROBOT, wxEVT_COMMAND_BUTTON_CLICKED,
@@ -32,6 +36,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     sizer->Add(m_defineRobot, 0, wxEXPAND, 0);
     sizer->Add(m_defineStartPose, 0, wxEXPAND, 0);
     sizer->Add(m_defineGoalPose, 0, wxEXPAND, 0);
+    sizer->Add(m_decompositionSelection, 0, wxEXPAND, 0);
     sizer->Add(m_pathFinding, 0, wxEXPAND, 0);
     sizer->SetSizeHints(this);
     this->SetSizer(sizer);
@@ -131,8 +136,17 @@ void LeftPanel::OnDefineGoal(wxCommandEvent &WXUNUSED(event))
 
 void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
 {
+
+    if (this->m_decompositionSelection->GetSelection() == wxNOT_FOUND)
+    {
+        wxLogMessage("Please select one of the decomposition methods first.");
+        return;
+    }
+
+    auto decompositionSelected = this->m_decompositionSelection->GetStringSelection();
+
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
-    if (mainFrame->currentPanel != 5)
+    if (decompositionSelected == wxString("Simple Cell Decomposition") && mainFrame->currentPanel != 5)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
         m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
@@ -142,31 +156,4 @@ void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
         mainFrame->switchPanel(5);
         mainFrame->currentPanel = 5;
     }
-}
-
-PathFindingPanel::PathFindingPanel(wxPanel *parent)
-    : wxPanel(parent, wxID_ANY, wxDefaultPosition,
-              wxSize(-1, -1), wxBORDER_SUNKEN)
-{
-
-    // Create a wxGrid object
-    grid = new wxGrid(this,
-                      -1,
-                      wxPoint(0, 0),
-                      wxSize(200, 200));
-
-    // This 2 lines must be executed before CreateGrid()
-    grid->SetDefaultColSize(20);
-    grid->SetDefaultRowSize(20);
-
-    grid->CreateGrid(this->gridRow, this->gridCol);
-
-    grid->DisableDragGridSize();
-    grid->EnableEditing(false);
-    grid->HideRowLabels();
-    grid->HideColLabels();
-
-    wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
-    vbox->Add(grid, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALL, 20);
-    this->SetSizer(vbox);
 }
