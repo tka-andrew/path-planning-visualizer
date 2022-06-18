@@ -69,7 +69,7 @@ void MainFrame::OnUsageGuide(wxCommandEvent &event)
 void MainFrame::switchPanel(int panelNum)
 {
     m_sizer->Detach(1); // remove panel 1, which is the right panel
-    m_pathFindingPanel->Hide();
+    m_environmentGeometryPanel->Hide();
     m_robotGeometryPanel->Hide();
     m_startPosePanel->Hide();
     m_goalPosePanel->Hide();
