@@ -11,9 +11,10 @@ class SimpleDecompositionPanel : public wxPanel
 public:
     SimpleDecompositionPanel(wxPanel *parent, int gridRow = 40, int gridCol = 60, int gridRowSize = 20, int gridColSize = 20);
     void simpleCellDecomposition();
-    void resetAndLayoutGrid();
+    void resetGrid();
     wxGrid *grid;
     wxPanel *m_parent;
+    wxBoxSizer *m_sizer;
     int gridRow;
     int gridCol;
     int gridRowSize;

@@ -13,11 +13,6 @@ SimpleDecompositionPanel::SimpleDecompositionPanel(wxPanel *parent, int gridRow,
     this->gridRowSize = gridRowSize;
     this->gridColSize = gridColSize;
 
-    this->resetAndLayoutGrid();
-}
-
-void SimpleDecompositionPanel::resetAndLayoutGrid()
-{
     // Create a wxGrid object
     grid = new wxGrid(this, wxID_ANY);
 
@@ -31,10 +26,21 @@ void SimpleDecompositionPanel::resetAndLayoutGrid()
     grid->EnableEditing(false);
     grid->HideRowLabels();
     grid->HideColLabels();
+    m_sizer = new wxBoxSizer(wxVERTICAL);
+    m_sizer->Add(grid, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALL, 20);
+    this->SetSizer(m_sizer);
+}
 
-    wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
-    vbox->Add(grid, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALL, 20);
-    this->SetSizer(vbox);
+void SimpleDecompositionPanel::resetGrid()
+{
+    for (int i = 0; i < this->gridRow; i++)
+    {
+        for (int j = 0; j < this->gridCol; j++)
+        {
+            this->grid->SetCellBackgroundColour(i, j, wxColour(255, 255, 255));
+        }
+    }
+
 }
 
 bool hasObstacle(cv::Mat &roi)
@@ -59,7 +65,8 @@ bool hasObstacle(cv::Mat &roi)
 
 void SimpleDecompositionPanel::simpleCellDecomposition()
 {
-    this->resetAndLayoutGrid(); // reset the grid in case any changes
+    this->resetGrid(); // reset the grid in case any changes
+    
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     wxBitmap cspace = wxBitmap(mainFrame->m_goalPosePanel->m_cspace);
     wxImage cspace_img = cspace.ConvertToImage();
