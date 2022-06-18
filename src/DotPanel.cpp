@@ -39,12 +39,22 @@ void DotPanel::resetDrawing()
     cv::Mat originalThresh = cv::Mat::zeros( environmentImg_gray.size(), CV_8UC3 );
     cv::Mat cspace = cv::Mat::zeros( environmentImg_gray.size(), CV_8UC3 );
     float contourRadius = mainFrame->m_robotGeometryPanel->m_robotBoundingRadius;
-    contourRadius += contourRadius/2; // the contour is actually drawn along the edge of contour, so we need extra half of it
+    contourRadius += contourRadius; // the contour is actually drawn along the edge of contour, so we need another half of it
     for( size_t i = 0; i< contours.size(); i++ )
     {
         cv::drawContours( originalThresh, contours, (int)i, cv::Scalar(255,255,255), -1, cv::LINE_8 );
         cv::drawContours( cspace, contours, (int)i, cv::Scalar(255,255,255), contourRadius, cv::LINE_8 );
     }
+
+    // draw contour around the boundary
+    std::vector<std::vector<cv::Point> > boundaryContours;
+    std::vector<cv::Point> cornerPoints;
+    cornerPoints.push_back({0,0});
+    cornerPoints.push_back({0,environmentImg.size().height});
+    cornerPoints.push_back({environmentImg.size().width,environmentImg.size().height});
+    cornerPoints.push_back({environmentImg.size().width,0});
+    boundaryContours.push_back(cornerPoints);
+    cv::drawContours( cspace, boundaryContours, 0, cv::Scalar(255,255,255), contourRadius, cv::LINE_8 );
 
     cv::bitwise_or(originalThresh, cspace, cspace);
     cv::bitwise_not(cspace, cspace);
