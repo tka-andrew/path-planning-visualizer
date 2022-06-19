@@ -40,20 +40,16 @@ void SimpleDecompositionPanel::resetGrid()
             this->grid->SetCellBackgroundColour(i, j, wxColour(255, 255, 255));
         }
     }
-
 }
 
 bool hasObstacle(cv::Mat &roi)
 {
-    uchar *pRoiData = roi.data; // uchar pointer because roi.data return uchar type
+    // REFERENCE: https://docs.opencv.org/3.3.0/db/da5/tutorial_how_to_scan_images.html
     for (int row = 0; row < roi.rows; ++row)
     {
         for (int column = 0; column < roi.cols; ++column)
         {
-            // should be: int value = pRoiData[img.channels() * (img.cols * row + column) + channel]; for each channel
-            // but since gray image only has one channel, we can simplify it
-            int index = roi.cols * row + column;
-            int value = pRoiData[index];
+            int value = int(roi.at<uchar>(row,column));
             if (value != 255)
             {
                 return true;
@@ -68,14 +64,12 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
     this->resetGrid(); // reset the grid in case any changes
     
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
-    wxBitmap cspace = wxBitmap(mainFrame->m_goalPosePanel->m_cspace);
-    wxImage cspace_img = cspace.ConvertToImage();
-    cv::Mat cspaceMatImg = OpenCV_wxWidgets::cvMat_from_wxImage( cspace_img );
-    int imgWidth = cspaceMatImg.size().width;
-    int imgHeight = cspaceMatImg.size().height;
-
+    cv::Mat cspaceMatImg = mainFrame->m_goalPosePanel->m_cspaceMatImg;
     cv::Mat cspaceMatImg_gray;
     cv::cvtColor(cspaceMatImg.clone(), cspaceMatImg_gray, cv::COLOR_BGR2GRAY);
+
+    int imgWidth = cspaceMatImg_gray.size().width;
+    int imgHeight = cspaceMatImg_gray.size().height;
 
     int pixel_width_per_grid = ceil(float(imgWidth)/this->gridCol); // ceil is used to handle worst case
     int pixel_height_per_grid = ceil(float(imgHeight)/this->gridRow); // ceil is used to handle worst case
