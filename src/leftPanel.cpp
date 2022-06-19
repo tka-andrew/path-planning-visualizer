@@ -1,5 +1,6 @@
 #include "mainFrame.h"
 #include "leftPanel.h"
+#include "pathFindingAlgorithms_grid.h"
 
 LeftPanel::LeftPanel(wxPanel *parent)
     : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(200, 200), wxBORDER_SUNKEN)
@@ -12,6 +13,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     m_pathFinding = new wxButton(this, ID_PATHFINDING, wxT("Path finding"));
     m_startSimulation = new wxButton(this, ID_STARTSIMULATION, wxT("Start Simulation"));
     m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200)); // initially first button is selected
+    m_startSimulation->Disable();
 
     wxArrayString decompositionChoices;
     decompositionChoices.Add(wxT("Simple Cell Decomposition"));
@@ -38,15 +40,17 @@ LeftPanel::LeftPanel(wxPanel *parent)
             wxCommandEventHandler(LeftPanel::OnDefineGoal));
     Connect(ID_PATHFINDING, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnPathFinding));
+    Connect(ID_STARTSIMULATION, wxEVT_COMMAND_BUTTON_CLICKED,
+            wxCommandEventHandler(LeftPanel::OnStartSimulation));
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(m_defineEnvironment, 0, wxEXPAND, 0);
     sizer->Add(m_defineRobot, 0, wxEXPAND, 0);
     sizer->Add(m_defineStartPose, 0, wxEXPAND, 0);
     sizer->Add(m_defineGoalPose, 0, wxEXPAND, 0);
-    sizer->Add(m_pathFinding, 0, wxEXPAND, 0);
     sizer->Add(comboBoxDescription1, 0, wxEXPAND | wxTOP, 10);
     sizer->Add(m_decompositionSelection, 0, wxEXPAND, 0);
+    sizer->Add(m_pathFinding, 0, wxEXPAND | wxBOTTOM, 10);
     sizer->Add(comboBoxDescription2, 0, wxEXPAND | wxTOP, 10);
     sizer->Add(m_algoSelection, 0, wxEXPAND, 0);
     sizer->Add(m_startSimulation, 0, wxEXPAND | wxTOP, 20);
@@ -174,4 +178,99 @@ void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
         mainFrame->switchPanel(5);
         mainFrame->currentPanel = 5;
     }
+}
+
+void LeftPanel::OnStartSimulation(wxCommandEvent &WXUNUSED(event))
+{
+    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+
+    if (this->m_algoSelection->GetSelection() == wxNOT_FOUND)
+    {
+        wxLogMessage("Please select one of the path finding algorithms first.");
+        return;
+    }
+
+    // clearSearch(); // clearSearch before starting simulation
+
+    auto algoSelected = this->m_algoSelection->GetStringSelection();
+    auto decompositionSelected = this->m_decompositionSelection->GetStringSelection();
+
+    if (decompositionSelected == wxString("Simple Cell Decomposition"))
+    {
+        this->SimpleDecompositionPathFinding(algoSelected);
+    }
+}
+
+void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
+{
+    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    SimpleDecompositionPanel *simpleDecompositionPanelPtr = (SimpleDecompositionPanel *)mainFrame->m_simpleDecompositionPanel;
+    wxGrid *gridPtr = (wxGrid *)simpleDecompositionPanelPtr->grid;
+    int row = simpleDecompositionPanelPtr->gridRow;
+    int col = simpleDecompositionPanelPtr->gridCol;
+
+    std::array<int, 2> startingPoint = simpleDecompositionPanelPtr->startingPoint;
+    std::array<int, 2> destinationPoint = simpleDecompositionPanelPtr->destinationPoint;
+
+    // return: numOfCellsVisited, numOfCellCheckingOccurrence, minTravelCost, prev
+    std::tuple<int, int, int, std::vector<std::vector<std::array<int, 2>>>> pathFindingResult;
+
+    if (algoSelected == wxString("Dijkstra"))
+    {
+        pathFindingResult = dijkstraSingleTarget(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+    }
+    else if (algoSelected == wxString("A* Search"))
+    {
+        pathFindingResult = aStarSearch(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+    }
+    else if (algoSelected == wxString("Greedy Best First Search"))
+    {
+        pathFindingResult = greedyBestFirstSearch(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+    }
+    else if (algoSelected == wxString("BFS"))
+    {
+        pathFindingResult = bfs(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+    }
+    else if (algoSelected == wxString("Bidirectional BFS"))
+    {
+        pathFindingResult = bidirectionalBFS(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+    }
+    else
+    {
+        wxLogMessage("Invalid selection.");
+        return;
+    }
+
+    int numOfCellsVisited = std::get<0>(pathFindingResult);
+    int numOfCellCheckingOccurrence = std::get<1>(pathFindingResult);
+    int shortestDistance = std::get<2>(pathFindingResult);
+    std::vector<std::vector<std::array<int, 2>>> prev = std::get<3>(pathFindingResult);
+
+    int targetR = simpleDecompositionPanelPtr->destinationPoint[0];
+    int targetC = simpleDecompositionPanelPtr->destinationPoint[1];
+    std::array<int, 2> pathTrackCell{prev[targetR][targetC]};
+    while (pathTrackCell[0] != -1 || pathTrackCell[1] != -1)
+    {
+        int row = pathTrackCell[0];
+        int col = pathTrackCell[1];
+        gridPtr->SetCellBackgroundColour(row, col, wxColour(100, 100, 100));
+        pathTrackCell[0] = prev[row][col][0];
+        pathTrackCell[1] = prev[row][col][1];
+
+        // INSPIRED BY: https://github.com/ArturMarekNowak/Pathfinding-Visualization/blob/master/SourceFiles/cMain.cpp
+        mainFrame->Update();
+        mainFrame->Refresh(false);
+    }
+
+    // paint the starting point back to green
+    gridPtr->SetCellBackgroundColour(startingPoint[0], startingPoint[1], wxColour(0, 255, 0)); // green
+    gridPtr->ForceRefresh();
+
+    if (shortestDistance == INT_MAX)
+    {
+        wxLogMessage("Number of cells visited: %d\nNumber of cell checking occurrence: %d\nThe destination is unreachable!", numOfCellsVisited, numOfCellCheckingOccurrence);
+        return;
+    }
+
+    wxLogMessage("Number of cells visited: %d\nNumber of cell checking occurence: %d\nMinimum distance %d", numOfCellsVisited, numOfCellCheckingOccurrence, shortestDistance);
 }

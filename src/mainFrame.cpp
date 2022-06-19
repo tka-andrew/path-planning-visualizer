@@ -74,6 +74,7 @@ void MainFrame::switchPanel(int panelNum)
     m_startPosePanel->Hide();
     m_goalPosePanel->Hide();
     m_simpleDecompositionPanel->Hide();
+    this->m_lp->m_startSimulation->Disable();
 
     switch (panelNum)
     {
@@ -100,6 +101,7 @@ void MainFrame::switchPanel(int panelNum)
         m_goalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         m_simpleDecompositionPanel->simpleCellDecomposition(); // update the grid
         m_simpleDecompositionPanel->Show();
+        this->m_lp->m_startSimulation->Enable();
         break;
     }
     m_sizer->Layout();

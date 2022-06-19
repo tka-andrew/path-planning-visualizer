@@ -14,6 +14,8 @@ public:
     void OnDefineStart(wxCommandEvent &event);
     void OnDefineGoal(wxCommandEvent &event);
     void OnPathFinding(wxCommandEvent &event);
+    void OnStartSimulation(wxCommandEvent &WXUNUSED(event));
+    void SimpleDecompositionPathFinding(wxString algoSelected);
     wxButton *m_defineEnvironment;
     wxButton *m_defineRobot;
     wxButton *m_defineStartPose;

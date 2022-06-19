@@ -6,6 +6,8 @@
 #include <wx/wx.h>
 #include <wx/grid.h>
 
+#include <array>
+
 class SimpleDecompositionPanel : public wxPanel
 {
 public:
@@ -19,6 +21,9 @@ public:
     int gridCol;
     int gridRowSize;
     int gridColSize;
+    std::array<int, 2> startingPoint = {-1, -1};
+    std::array<int, 2> destinationPoint = {-1, -1};
+
 private:
     bool initialSizeTaken = false;
 };

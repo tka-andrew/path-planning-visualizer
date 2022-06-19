@@ -133,6 +133,9 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
     int goalPoseGridX = mainFrame->m_goalPosePanel->dotPoseY  / pixel_height_per_grid;
     int goalPoseGridY = mainFrame->m_goalPosePanel->dotPoseX / pixel_width_per_grid;
 
+    startingPoint = {startPoseGridX, startPoseGridY};
+    destinationPoint = {goalPoseGridX, goalPoseGridY};
+
     this->grid->SetCellBackgroundColour(startPoseGridX, startPoseGridY, wxColour(0,255,0));
     this->grid->SetCellBackgroundColour(goalPoseGridX, goalPoseGridY, wxColour(255,0,0));
 }
