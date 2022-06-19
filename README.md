@@ -29,9 +29,8 @@ cmake --build .
 ```
 
 ## TO-DO
-1. Path Finding
-2. Add Visibility Graph
-3. Make this project runnable as a docker container
+1. Support more decomposition methods such as visibility graph
+2. Make this project runnable as a docker container
 
 ## References
 1. [How to expand contour by certain radius](https://stackoverflow.com/questions/58981397/how-to-dilate-a-contour-by-a-specific-number-of-pixels-without-iterating-over-e)
