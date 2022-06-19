@@ -16,6 +16,17 @@ LeftPanel::LeftPanel(wxPanel *parent)
     decompositionChoices.Add(wxT("Simple Cell Decomposition"));
     m_decompositionSelection = new wxComboBox(this, ID_DECOMPOSTION_SELECTION, "", wxDefaultPosition, wxSize(100, -1), decompositionChoices);
 
+    wxArrayString algoChoices;
+    algoChoices.Add(wxT("Dijkstra"));
+    algoChoices.Add(wxT("A* Search"));
+    algoChoices.Add(wxT("Greedy Best First Search"));
+    algoChoices.Add(wxT("BFS"));
+    algoChoices.Add(wxT("Bidirectional BFS"));
+    m_algoSelection = new wxComboBox(this, ID_ALGO_SELECTION, "", wxDefaultPosition, wxSize(100, -1), algoChoices);
+
+    wxStaticText *comboBoxDescription1 = new wxStaticText(this, wxID_ANY, "Decomposition", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
+    wxStaticText *comboBoxDescription2 = new wxStaticText(this, wxID_ANY, "PathFinding Algo", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
+
     Connect(ID_DEFINE_ENVIRONMENT, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnDefineEnvironment));
     Connect(ID_DEFINE_ROBOT, wxEVT_COMMAND_BUTTON_CLICKED,
@@ -32,8 +43,11 @@ LeftPanel::LeftPanel(wxPanel *parent)
     sizer->Add(m_defineRobot, 0, wxEXPAND, 0);
     sizer->Add(m_defineStartPose, 0, wxEXPAND, 0);
     sizer->Add(m_defineGoalPose, 0, wxEXPAND, 0);
-    sizer->Add(m_decompositionSelection, 0, wxEXPAND, 0);
     sizer->Add(m_pathFinding, 0, wxEXPAND, 0);
+    sizer->Add(comboBoxDescription1, 0, wxEXPAND | wxTOP, 10);
+    sizer->Add(m_decompositionSelection, 0, wxEXPAND, 0);
+    sizer->Add(comboBoxDescription2, 0, wxEXPAND | wxTOP, 10);
+    sizer->Add(m_algoSelection, 0, wxEXPAND, 0);
     sizer->SetSizeHints(this);
     this->SetSizer(sizer);
 }
