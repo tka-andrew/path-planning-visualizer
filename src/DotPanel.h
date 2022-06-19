@@ -6,6 +6,7 @@
 #include <wx/wx.h>
 #include <wx/dcmemory.h>
 #include <wx/dcbuffer.h>
+#include <opencv2/opencv.hpp>
 
 class DotPanel : public wxPanel
 {
@@ -14,6 +15,7 @@ public:
     wxPanel *m_parent;
     wxBitmap m_cspace;
     wxBitmap m_drawing;
+    cv::Mat m_cspaceMatImg;
     wxColor m_dotColor;
     int dotPoseX = -1;
     int dotPoseY = -1;
