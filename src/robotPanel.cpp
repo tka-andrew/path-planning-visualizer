@@ -45,3 +45,9 @@ void RobotGeometryPanel::checkRobotContour()
     cv::minEnclosingCircle	(contours[0], center, radius);
     this->m_robotBoundingRadius = ceil(radius);
 }
+
+void RobotGeometryPanel::resetDrawing()
+{
+    DrawingPanel::resetDrawing();
+    this->m_robotBoundingRadius = -1; // reset this also
+}

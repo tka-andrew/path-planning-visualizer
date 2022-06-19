@@ -16,7 +16,7 @@ public:
     wxBitmap m_drawing;
 
     void OnResetDrawing(wxCommandEvent &event);
-    void resetDrawing();
+    virtual void resetDrawing();
     int getClientAreaHeight();
     int getClientAreaWidth();
 

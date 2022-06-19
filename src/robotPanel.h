@@ -13,6 +13,7 @@ public:
     virtual void OnLeftMouseUp(wxMouseEvent& event) override;
     virtual void OnRightMouseUp(wxMouseEvent& event) override;
     void checkRobotContour();
+    virtual void resetDrawing() override;
     float m_robotBoundingRadius = -1;
 };
 

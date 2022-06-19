@@ -151,6 +151,12 @@ void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
 
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
 
+    if (mainFrame->m_robotGeometryPanel->m_robotBoundingRadius == -1)
+    {
+        wxLogMessage("Please define a valid robot geometry first.");
+        return;
+    }
+
     int startPoseX = mainFrame->m_startPosePanel->dotPoseX;
     int startPoseY = mainFrame->m_startPosePanel->dotPoseY; 
     if (startPoseX == -1 || startPoseY == -1)
