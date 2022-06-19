@@ -28,6 +28,8 @@ set(Sources
     src/DotPanel.cpp
     src/simpleDecompositionPanel.cpp
     src/util.cpp
+    src/heuristicFunctions_grid.cpp
+    src/pathFindingAlgorithms_grid.cpp
 )
 
 # add the executable
