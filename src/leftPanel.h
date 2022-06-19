@@ -19,6 +19,7 @@ public:
     wxButton *m_defineStartPose;
     wxButton *m_defineGoalPose;
     wxButton *m_pathFinding;
+    wxButton *m_startSimulation;
     wxComboBox *m_decompositionSelection;
     wxComboBox *m_algoSelection;
     wxPanel *m_parent;

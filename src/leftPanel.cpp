@@ -10,6 +10,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     m_defineStartPose = new wxButton(this, ID_DEFINE_START, wxT("Define Start"));
     m_defineGoalPose = new wxButton(this, ID_DEFINE_GOAL, wxT("Define Goal"));
     m_pathFinding = new wxButton(this, ID_PATHFINDING, wxT("Path finding"));
+    m_startSimulation = new wxButton(this, ID_STARTSIMULATION, wxT("Start Simulation"));
     m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200)); // initially first button is selected
 
     wxArrayString decompositionChoices;
@@ -25,7 +26,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     m_algoSelection = new wxComboBox(this, ID_ALGO_SELECTION, "", wxDefaultPosition, wxSize(100, -1), algoChoices);
 
     wxStaticText *comboBoxDescription1 = new wxStaticText(this, wxID_ANY, "Decomposition", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
-    wxStaticText *comboBoxDescription2 = new wxStaticText(this, wxID_ANY, "PathFinding Algo", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
+    wxStaticText *comboBoxDescription2 = new wxStaticText(this, wxID_ANY, "Path Finding Algo", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
 
     Connect(ID_DEFINE_ENVIRONMENT, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(LeftPanel::OnDefineEnvironment));
@@ -48,6 +49,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     sizer->Add(m_decompositionSelection, 0, wxEXPAND, 0);
     sizer->Add(comboBoxDescription2, 0, wxEXPAND | wxTOP, 10);
     sizer->Add(m_algoSelection, 0, wxEXPAND, 0);
+    sizer->Add(m_startSimulation, 0, wxEXPAND | wxTOP, 20);
     sizer->SetSizeHints(this);
     this->SetSizer(sizer);
 }
