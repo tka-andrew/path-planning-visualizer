@@ -136,6 +136,11 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
     startingPoint = {startPoseGridX, startPoseGridY};
     destinationPoint = {goalPoseGridX, goalPoseGridY};
 
-    this->grid->SetCellBackgroundColour(startPoseGridX, startPoseGridY, wxColour(0,255,0));
-    this->grid->SetCellBackgroundColour(goalPoseGridX, goalPoseGridY, wxColour(255,0,0));
+    this->paintStartAndGoal();
+}
+
+void SimpleDecompositionPanel::paintStartAndGoal()
+{
+    this->grid->SetCellBackgroundColour(startingPoint[0], startingPoint[1], wxColour(0,255,0));
+    this->grid->SetCellBackgroundColour(destinationPoint[0], destinationPoint[1], wxColour(255,0,0));
 }

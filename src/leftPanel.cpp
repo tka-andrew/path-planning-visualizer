@@ -49,11 +49,11 @@ LeftPanel::LeftPanel(wxPanel *parent)
     sizer->Add(m_defineStartPose, 0, wxEXPAND, 0);
     sizer->Add(m_defineGoalPose, 0, wxEXPAND, 0);
     sizer->Add(comboBoxDescription1, 0, wxEXPAND | wxTOP, 10);
-    sizer->Add(m_decompositionSelection, 0, wxEXPAND, 0);
+    sizer->Add(m_decompositionSelection, 0, wxEXPAND | wxBOTTOM, 5);
     sizer->Add(m_pathFinding, 0, wxEXPAND | wxBOTTOM, 10);
     sizer->Add(comboBoxDescription2, 0, wxEXPAND | wxTOP, 10);
-    sizer->Add(m_algoSelection, 0, wxEXPAND, 0);
-    sizer->Add(m_startSimulation, 0, wxEXPAND | wxTOP, 20);
+    sizer->Add(m_algoSelection, 0, wxEXPAND | wxBOTTOM, 5);
+    sizer->Add(m_startSimulation, 0, wxEXPAND, 0);
     sizer->SetSizeHints(this);
     this->SetSizer(sizer);
 }
@@ -206,9 +206,11 @@ void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     SimpleDecompositionPanel *simpleDecompositionPanelPtr = (SimpleDecompositionPanel *)mainFrame->m_simpleDecompositionPanel;
     wxGrid *gridPtr = (wxGrid *)simpleDecompositionPanelPtr->grid;
+
+    simpleDecompositionPanelPtr->simpleCellDecomposition(); // to clear previous search if any
+
     int row = simpleDecompositionPanelPtr->gridRow;
     int col = simpleDecompositionPanelPtr->gridCol;
-
     std::array<int, 2> startingPoint = simpleDecompositionPanelPtr->startingPoint;
     std::array<int, 2> destinationPoint = simpleDecompositionPanelPtr->destinationPoint;
 
@@ -241,6 +243,8 @@ void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
         return;
     }
 
+    simpleDecompositionPanelPtr->paintStartAndGoal();
+
     int numOfCellsVisited = std::get<0>(pathFindingResult);
     int numOfCellCheckingOccurrence = std::get<1>(pathFindingResult);
     int shortestDistance = std::get<2>(pathFindingResult);
@@ -262,8 +266,7 @@ void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
         mainFrame->Refresh(false);
     }
 
-    // paint the starting point back to green
-    gridPtr->SetCellBackgroundColour(startingPoint[0], startingPoint[1], wxColour(0, 255, 0)); // green
+    simpleDecompositionPanelPtr->paintStartAndGoal();
     gridPtr->ForceRefresh();
 
     if (shortestDistance == INT_MAX)
