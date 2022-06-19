@@ -214,7 +214,7 @@ void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
     std::array<int, 2> startingPoint = simpleDecompositionPanelPtr->startingPoint;
     std::array<int, 2> destinationPoint = simpleDecompositionPanelPtr->destinationPoint;
 
-    // return: numOfCellsVisited, numOfCellCheckingOccurrence, minTravelCost, prev
+    // return: numOfCellsVisited, numOfCellCheckingOccurrence, travelCost, prev
     std::tuple<int, int, int, std::vector<std::vector<std::array<int, 2>>>> pathFindingResult;
 
     if (algoSelected == wxString("Dijkstra"))
@@ -247,7 +247,7 @@ void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
 
     int numOfCellsVisited = std::get<0>(pathFindingResult);
     int numOfCellCheckingOccurrence = std::get<1>(pathFindingResult);
-    int shortestDistance = std::get<2>(pathFindingResult);
+    int travelCost = std::get<2>(pathFindingResult);
     std::vector<std::vector<std::array<int, 2>>> prev = std::get<3>(pathFindingResult);
 
     int targetR = simpleDecompositionPanelPtr->destinationPoint[0];
@@ -269,11 +269,11 @@ void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
     simpleDecompositionPanelPtr->paintStartAndGoal();
     gridPtr->ForceRefresh();
 
-    if (shortestDistance == INT_MAX)
+    if (travelCost == INT_MAX)
     {
         wxLogMessage("Number of cells visited: %d\nNumber of cell checking occurrence: %d\nThe destination is unreachable!", numOfCellsVisited, numOfCellCheckingOccurrence);
         return;
     }
 
-    wxLogMessage("Number of cells visited: %d\nNumber of cell checking occurence: %d\nMinimum distance %d", numOfCellsVisited, numOfCellCheckingOccurrence, shortestDistance);
+    wxLogMessage("Number of cells visited: %d\nNumber of cell checking occurence: %d\nTravel cost %d", numOfCellsVisited, numOfCellCheckingOccurrence, travelCost);
 }
