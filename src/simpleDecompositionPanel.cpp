@@ -45,12 +45,25 @@ void SimpleDecompositionPanel::resetGrid()
 bool hasObstacle(cv::Mat &roi)
 {
     // REFERENCE: https://docs.opencv.org/3.3.0/db/da5/tutorial_how_to_scan_images.html
-    for (int row = 0; row < roi.rows; ++row)
+
+    // accept only char type matrices
+    CV_Assert(roi.depth() == CV_8U);
+    int channels = roi.channels();
+    int nRows = roi.rows;
+    int nCols = roi.cols * channels;
+    if (roi.isContinuous())
     {
-        for (int column = 0; column < roi.cols; ++column)
+        nCols *= nRows;
+        nRows = 1;
+    }
+    int i,j;
+    uchar* p;
+    for( i = 0; i < nRows; ++i)
+    {
+        p = roi.ptr<uchar>(i);
+        for ( j = 0; j < nCols; ++j)
         {
-            int value = int(roi.at<uchar>(row,column));
-            if (value != 255)
+            if (p[j] != 255)
             {
                 return true;
             }
