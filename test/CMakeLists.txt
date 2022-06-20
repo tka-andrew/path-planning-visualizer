@@ -4,11 +4,11 @@ cmake_minimum_required(VERSION 3.10)
 set(This UnitTests)
 
 set (Sources
-    dummyTest.cpp
+    HeuristicFunctionTest_grid.cpp
 )
 
 set (SourcesToBeTested
-    ${CMAKE_SOURCE_DIR}/src/mainFrame.cpp
+    ${CMAKE_SOURCE_DIR}/src/heuristicFunctions_grid.cpp
 )
 
 set (HeaderDirectoryToBeTested

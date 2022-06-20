@@ -64,5 +64,5 @@ include_directories( ${OpenCV_INCLUDE_DIRS} )
 # REFERENCE: https://docs.wxwidgets.org/trunk/overview_cmake.html
 target_link_libraries(${PROJECT_NAME} ${wxWidgets_LIBRARIES} ${OpenCV_LIBS})
 
-# add_subdirectory(thirdparty/googletest)
-# add_subdirectory(test)
+add_subdirectory(thirdparty/googletest)
+add_subdirectory(test)
