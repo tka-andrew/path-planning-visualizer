@@ -7,6 +7,7 @@
 #include "robotPanel.h"
 #include "DotPanel.h"
 #include "simpleDecompositionPanel.h"
+#include "visibilityGraphPanel.h"
 
 #include <wx/wx.h>
 #include <wx/grid.h>
@@ -26,6 +27,7 @@ public:
     DotPanel *m_startPosePanel;
     DotPanel *m_goalPosePanel;
     SimpleDecompositionPanel *m_simpleDecompositionPanel;
+    VisibilityGraphPanel *m_visibilityGraphPanel;
     wxPanel *m_parent;
     wxBoxSizer *m_sizer;
     int currentPanel = 1;

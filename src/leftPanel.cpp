@@ -17,6 +17,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
 
     wxArrayString decompositionChoices;
     decompositionChoices.Add(wxT("Simple Cell Decomposition"));
+    decompositionChoices.Add(wxT("Visibility Graph"));
     m_decompositionSelection = new wxComboBox(this, ID_DECOMPOSTION_SELECTION, "", wxDefaultPosition, wxSize(100, -1), decompositionChoices);
 
     wxArrayString algoChoices;
@@ -172,17 +173,22 @@ void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
         return;
     }
 
+    m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
+    m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
+    m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
+    m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
+    m_pathFinding->SetBackgroundColour(wxColor(200,200,200));
+
     auto decompositionSelected = this->m_decompositionSelection->GetStringSelection();
 
     if (decompositionSelected == wxString("Simple Cell Decomposition") && mainFrame->currentPanel != 5)
     {
-        m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
-        m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
-        m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
-        m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
-        m_pathFinding->SetBackgroundColour(wxColor(200,200,200));
         mainFrame->switchPanel(5);
         mainFrame->currentPanel = 5;
+    } else if (decompositionSelected == wxString("Visibility Graph") && mainFrame->currentPanel != 6)
+    {
+        mainFrame->switchPanel(6);
+        mainFrame->currentPanel = 6;
     }
 }
 

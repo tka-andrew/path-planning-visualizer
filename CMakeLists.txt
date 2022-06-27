@@ -27,6 +27,7 @@ set(Sources
     src/DrawingPanel.cpp
     src/DotPanel.cpp
     src/simpleDecompositionPanel.cpp
+    src/visibilityGraphPanel.cpp
     src/util.cpp
     src/heuristicFunctions_grid.cpp
     src/pathFindingAlgorithms_grid.cpp
