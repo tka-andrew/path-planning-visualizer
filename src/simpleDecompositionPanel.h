@@ -24,9 +24,6 @@ public:
     int gridColSize;
     std::array<int, 2> startingPoint = {-1, -1};
     std::array<int, 2> destinationPoint = {-1, -1};
-
-private:
-    bool initialSizeTaken = false;
 };
 
 #endif // SIMPLE_DECOMPOSITION_PANEL_H
