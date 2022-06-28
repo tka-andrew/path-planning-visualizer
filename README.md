@@ -29,8 +29,11 @@ cmake --build .
 ```
 
 ## TO-DO
-1. Support more decomposition methods such as visibility graph
+1. Support other path planning approaches such as RRT and PRM
 2. Make this project runnable as a docker container
+
+## Side Notes
+1. The visibilityGraphPanel in the src folder is not used, as I couldn't find any suitable OpenCV function to convert the non-polygonal contours into contours with only edges and vertices. Without the vertices, Exact Cell Decomposition and Visibility Graph wouldn't be possible. Do let me know if you have any idea in implementing them.
 
 ## References
 1. [How to expand contour by certain radius](https://stackoverflow.com/questions/58981397/how-to-dilate-a-contour-by-a-specific-number-of-pixels-without-iterating-over-e)

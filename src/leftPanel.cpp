@@ -17,7 +17,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
 
     wxArrayString decompositionChoices;
     decompositionChoices.Add(wxT("Simple Cell Decomposition"));
-    decompositionChoices.Add(wxT("Visibility Graph"));
+    // decompositionChoices.Add(wxT("Visibility Graph"));
     m_decompositionSelection = new wxComboBox(this, ID_DECOMPOSTION_SELECTION, "", wxDefaultPosition, wxSize(100, -1), decompositionChoices);
 
     wxArrayString algoChoices;
