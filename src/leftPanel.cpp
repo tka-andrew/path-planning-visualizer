@@ -121,8 +121,8 @@ void LeftPanel::onDefineGoal(wxCommandEvent &WXUNUSED(event))
         return;
     }
 
-    int startPoseX = mainFrame->m_startPosePanel->dotPoseX;
-    int startPoseY = mainFrame->m_startPosePanel->dotPoseY; 
+    int startPoseX = mainFrame->pStartPosePanel->dotPoseX;
+    int startPoseY = mainFrame->pStartPosePanel->dotPoseY; 
     if (startPoseX == -1 || startPoseY == -1)
     {
         wxLogMessage("Please define start pose first.");
@@ -158,8 +158,8 @@ void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
         return;
     }
 
-    int startPoseX = mainFrame->m_startPosePanel->dotPoseX;
-    int startPoseY = mainFrame->m_startPosePanel->dotPoseY; 
+    int startPoseX = mainFrame->pStartPosePanel->dotPoseX;
+    int startPoseY = mainFrame->pStartPosePanel->dotPoseY; 
     if (startPoseX == -1 || startPoseY == -1)
     {
         wxLogMessage("Please define start pose & goal pose first.");

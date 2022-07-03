@@ -24,7 +24,7 @@ public:
     LeftPanel *m_lp;
     EnvironmentGeometryPanel *pEnvironmentGeometryPanel;
     RobotGeometryPanel *pRobotGeometryPanel;
-    DotPanel *m_startPosePanel;
+    DotPanel *pStartPosePanel;
     DotPanel *m_goalPosePanel;
     SimpleDecompositionPanel *m_simpleDecompositionPanel;
     VisibilityGraphPanel *m_visibilityGraphPanel;

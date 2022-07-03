@@ -17,7 +17,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     m_lp = new LeftPanel(pParent);
     pEnvironmentGeometryPanel = new EnvironmentGeometryPanel(pParent, ID_RESET_ENVIRONMENT);
     pRobotGeometryPanel = new RobotGeometryPanel(pParent, ID_RESET_ROBOT);
-    m_startPosePanel = new DotPanel(pParent, wxColor(0,255,0));
+    pStartPosePanel = new DotPanel(pParent, wxColor(0,255,0));
     m_goalPosePanel = new DotPanel(pParent, wxColor(255,0,0));
     m_simpleDecompositionPanel = new SimpleDecompositionPanel(pParent);
     m_visibilityGraphPanel = new VisibilityGraphPanel(pParent);
@@ -25,7 +25,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     m_sizer->Add(m_lp, 0, wxSHAPED, 5);
     m_sizer->Add(pEnvironmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
     pRobotGeometryPanel->Hide();
-    m_startPosePanel->Hide();
+    pStartPosePanel->Hide();
     m_goalPosePanel->Hide();
     m_simpleDecompositionPanel->Hide();
     m_visibilityGraphPanel->Hide();
@@ -73,7 +73,7 @@ void MainFrame::switchPanel(int panelNum)
     m_sizer->Detach(1); // remove panel 1, which is the right panel
     pEnvironmentGeometryPanel->Hide();
     pRobotGeometryPanel->Hide();
-    m_startPosePanel->Hide();
+    pStartPosePanel->Hide();
     m_goalPosePanel->Hide();
     m_simpleDecompositionPanel->Hide();
     m_visibilityGraphPanel->Hide();
@@ -90,9 +90,9 @@ void MainFrame::switchPanel(int panelNum)
         pRobotGeometryPanel->Show();
         break;
     case 3:
-        m_sizer->Add(m_startPosePanel, 1, wxGROW);
-        m_startPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
-        m_startPosePanel->Show();
+        m_sizer->Add(pStartPosePanel, 1, wxGROW);
+        pStartPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
+        pStartPosePanel->Show();
         break;
     case 4:
         m_sizer->Add(m_goalPosePanel, 1, wxGROW);

@@ -128,8 +128,8 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
     }
 
     // Take note that x,y in grid and image/wxbitmap are in opposite
-    int startPoseGridX = mainFrame->m_startPosePanel->dotPoseY / pixel_height_per_grid;
-    int startPoseGridY = mainFrame->m_startPosePanel->dotPoseX / pixel_width_per_grid;
+    int startPoseGridX = mainFrame->pStartPosePanel->dotPoseY / pixel_height_per_grid;
+    int startPoseGridY = mainFrame->pStartPosePanel->dotPoseX / pixel_width_per_grid;
     int goalPoseGridX = mainFrame->m_goalPosePanel->dotPoseY  / pixel_height_per_grid;
     int goalPoseGridY = mainFrame->m_goalPosePanel->dotPoseX / pixel_width_per_grid;
 
