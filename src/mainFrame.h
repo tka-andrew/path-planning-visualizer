@@ -23,7 +23,7 @@ public:
     MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
     LeftPanel *m_lp;
     EnvironmentGeometryPanel *pEnvironmentGeometryPanel;
-    RobotGeometryPanel *m_robotGeometryPanel;
+    RobotGeometryPanel *pRobotGeometryPanel;
     DotPanel *m_startPosePanel;
     DotPanel *m_goalPosePanel;
     SimpleDecompositionPanel *m_simpleDecompositionPanel;

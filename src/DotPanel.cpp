@@ -38,7 +38,7 @@ void DotPanel::resetDrawing()
     cv::findContours(environmentImg_thresh, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE );
     cv::Mat originalThresh = cv::Mat::zeros( environmentImg_gray.size(), CV_8UC3 );
     cv::Mat cspace = cv::Mat::zeros( environmentImg_gray.size(), CV_8UC3 );
-    float contourRadius = mainFrame->m_robotGeometryPanel->m_robotBoundingRadius;
+    float contourRadius = mainFrame->pRobotGeometryPanel->m_robotBoundingRadius;
     contourRadius += contourRadius; // the contour is actually drawn along the edge of contour, so we need another half of it
     for( size_t i = 0; i< contours.size(); i++ )
     {

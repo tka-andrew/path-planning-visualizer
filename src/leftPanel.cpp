@@ -93,7 +93,7 @@ void LeftPanel::onDefineStart(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
-    if (mainFrame->m_robotGeometryPanel->m_robotBoundingRadius == -1)
+    if (mainFrame->pRobotGeometryPanel->m_robotBoundingRadius == -1)
     {
         wxLogMessage("Please define a valid robot geometry first.");
         return;
@@ -115,7 +115,7 @@ void LeftPanel::onDefineGoal(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
-    if (mainFrame->m_robotGeometryPanel->m_robotBoundingRadius == -1)
+    if (mainFrame->pRobotGeometryPanel->m_robotBoundingRadius == -1)
     {
         wxLogMessage("Please define a valid robot geometry first.");
         return;
@@ -152,7 +152,7 @@ void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
 
     MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
-    if (mainFrame->m_robotGeometryPanel->m_robotBoundingRadius == -1)
+    if (mainFrame->pRobotGeometryPanel->m_robotBoundingRadius == -1)
     {
         wxLogMessage("Please define a valid robot geometry first.");
         return;
