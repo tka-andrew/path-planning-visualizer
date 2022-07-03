@@ -15,7 +15,7 @@ DotPanel::DotPanel(wxPanel *parent, wxColor dotColor)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition,
               wxSize(-1, -1), wxBORDER_SUNKEN)
 {
-    m_parent = parent;
+    pParent = parent;
     m_dotColor = dotColor;
     // REFERENCE: https://docs.wxwidgets.org/3.0/classwx_auto_buffered_paint_d_c.html
     this->SetBackgroundStyle(wxBG_STYLE_PAINT);
@@ -24,7 +24,7 @@ DotPanel::DotPanel(wxPanel *parent, wxColor dotColor)
 
 void DotPanel::resetDrawing()
 {
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
     wxBitmap environmentDrawing = wxBitmap(mainFrame->m_environmentGeometryPanel->m_drawing);
     wxImage environmentDrawing_img = environmentDrawing.ConvertToImage();
@@ -88,7 +88,7 @@ void DotPanel::onSize(wxSizeEvent &evt)
 {
     if (!initialSizeTaken)
     {
-        MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+        MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
         clientAreaHeight = mainFrame->m_environmentGeometryPanel->getClientAreaHeight();
         clientAreaWidth = mainFrame->m_environmentGeometryPanel->getClientAreaWidth();
         this->resetDrawing();

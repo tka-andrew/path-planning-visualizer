@@ -5,7 +5,7 @@
 LeftPanel::LeftPanel(wxPanel *parent)
     : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(200, 200), wxBORDER_SUNKEN)
 {
-    m_parent = parent;
+    pParent = parent;
     m_defineEnvironment = new wxButton(this, ID_DEFINE_ENVIRONMENT, wxT("Define environment"));
     m_defineRobot = new wxButton(this, ID_DEFINE_ROBOT, wxT("Define robot"));
     m_defineStartPose = new wxButton(this, ID_DEFINE_START, wxT("Define Start"));
@@ -61,7 +61,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
 
 void LeftPanel::onDefineEnvironment(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
     if (mainFrame->currentPanel != 1)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200));
@@ -76,7 +76,7 @@ void LeftPanel::onDefineEnvironment(wxCommandEvent &WXUNUSED(event))
 
 void LeftPanel::onDefineRobot(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
     if (mainFrame->currentPanel != 2)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
@@ -91,7 +91,7 @@ void LeftPanel::onDefineRobot(wxCommandEvent &WXUNUSED(event))
 
 void LeftPanel::onDefineStart(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
     if (mainFrame->m_robotGeometryPanel->m_robotBoundingRadius == -1)
     {
@@ -113,7 +113,7 @@ void LeftPanel::onDefineStart(wxCommandEvent &WXUNUSED(event))
 
 void LeftPanel::onDefineGoal(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
     if (mainFrame->m_robotGeometryPanel->m_robotBoundingRadius == -1)
     {
@@ -150,7 +150,7 @@ void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
         return;
     }
 
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
     if (mainFrame->m_robotGeometryPanel->m_robotBoundingRadius == -1)
     {
@@ -194,7 +194,7 @@ void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
 
 void LeftPanel::onStartSimulation(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
     if (this->m_algoSelection->GetSelection() == wxNOT_FOUND)
     {
@@ -215,7 +215,7 @@ void LeftPanel::onStartSimulation(wxCommandEvent &WXUNUSED(event))
 
 void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
 {
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
     SimpleDecompositionPanel *simpleDecompositionPanelPtr = (SimpleDecompositionPanel *)mainFrame->m_simpleDecompositionPanel;
     wxGrid *gridPtr = (wxGrid *)simpleDecompositionPanelPtr->grid;
 

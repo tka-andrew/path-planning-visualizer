@@ -12,7 +12,7 @@ class DotPanel : public wxPanel
 {
 public:
     DotPanel(wxPanel *parent, wxColor dotColor);
-    wxPanel *m_parent;
+    wxPanel *pParent;
     wxBitmap m_cspace;
     wxBitmap m_drawing;
     cv::Mat m_cspaceMatImg;

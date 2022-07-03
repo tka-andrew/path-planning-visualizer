@@ -28,7 +28,7 @@ public:
     DotPanel *m_goalPosePanel;
     SimpleDecompositionPanel *m_simpleDecompositionPanel;
     VisibilityGraphPanel *m_visibilityGraphPanel;
-    wxPanel *m_parent;
+    wxPanel *pParent;
     wxBoxSizer *m_sizer;
     int currentPanel = 1;
     bool canSwitchPanel();

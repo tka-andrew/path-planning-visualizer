@@ -10,17 +10,17 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     : wxFrame(NULL, wxID_ANY, title, pos, size)
 {
 
-    m_parent = new wxPanel(this, wxID_ANY);
+    pParent = new wxPanel(this, wxID_ANY);
 
     m_sizer = new wxBoxSizer(wxHORIZONTAL);
 
-    m_lp = new LeftPanel(m_parent);
-    m_environmentGeometryPanel = new EnvironmentGeometryPanel(m_parent, ID_RESET_ENVIRONMENT);
-    m_robotGeometryPanel = new RobotGeometryPanel(m_parent, ID_RESET_ROBOT);
-    m_startPosePanel = new DotPanel(m_parent, wxColor(0,255,0));
-    m_goalPosePanel = new DotPanel(m_parent, wxColor(255,0,0));
-    m_simpleDecompositionPanel = new SimpleDecompositionPanel(m_parent);
-    m_visibilityGraphPanel = new VisibilityGraphPanel(m_parent);
+    m_lp = new LeftPanel(pParent);
+    m_environmentGeometryPanel = new EnvironmentGeometryPanel(pParent, ID_RESET_ENVIRONMENT);
+    m_robotGeometryPanel = new RobotGeometryPanel(pParent, ID_RESET_ROBOT);
+    m_startPosePanel = new DotPanel(pParent, wxColor(0,255,0));
+    m_goalPosePanel = new DotPanel(pParent, wxColor(255,0,0));
+    m_simpleDecompositionPanel = new SimpleDecompositionPanel(pParent);
+    m_visibilityGraphPanel = new VisibilityGraphPanel(pParent);
 
     m_sizer->Add(m_lp, 0, wxSHAPED, 5);
     m_sizer->Add(m_environmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
@@ -30,7 +30,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     m_simpleDecompositionPanel->Hide();
     m_visibilityGraphPanel->Hide();
 
-    m_parent->SetSizer(m_sizer);
+    pParent->SetSizer(m_sizer);
 
     this->Centre();
 

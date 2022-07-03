@@ -15,14 +15,14 @@ VisibilityGraphPanel::VisibilityGraphPanel(wxPanel *parent)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition,
               wxSize(-1, -1), wxBORDER_SUNKEN)
 {
-    m_parent = parent;
+    pParent = parent;
     // REFERENCE: https://docs.wxwidgets.org/3.0/classwx_auto_buffered_paint_d_c.html
     this->SetBackgroundStyle(wxBG_STYLE_PAINT);
 }
 
 void VisibilityGraphPanel::constructGraph()
 {
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
     cv::Mat cspaceMatImg = mainFrame->m_goalPosePanel->m_cspaceMatImg;
     cv::Mat cspaceMatImg_gray;

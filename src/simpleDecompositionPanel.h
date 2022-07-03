@@ -16,7 +16,7 @@ public:
     void resetGrid();
     void paintStartAndGoal();
     wxGrid *grid;
-    wxPanel *m_parent;
+    wxPanel *pParent;
     wxBoxSizer *m_sizer;
     int gridRow;
     int gridCol;

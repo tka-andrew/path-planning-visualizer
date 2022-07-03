@@ -7,7 +7,7 @@
 SimpleDecompositionPanel::SimpleDecompositionPanel(wxPanel *parent, int gridRow, int gridCol, int gridRowSize, int gridColSize)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition, wxSize(-1, -1), wxBORDER_SUNKEN)
 {
-    this->m_parent = parent;
+    this->pParent = parent;
     this->gridRow = gridRow;
     this->gridCol = gridCol;
     this->gridRowSize = gridRowSize;
@@ -76,7 +76,7 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
 {
     this->resetGrid(); // reset the grid in case any changes
     
-    MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
+    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
     cv::Mat cspaceMatImg = mainFrame->m_goalPosePanel->m_cspaceMatImg;
     cv::Mat cspaceMatImg_gray;
     cv::cvtColor(cspaceMatImg.clone(), cspaceMatImg_gray, cv::COLOR_BGR2GRAY);

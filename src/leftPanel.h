@@ -24,7 +24,7 @@ public:
     wxButton *m_startSimulation;
     wxComboBox *m_decompositionSelection;
     wxComboBox *m_algoSelection;
-    wxPanel *m_parent;
+    wxPanel *pParent;
 };
 
 #endif // LEFT_PANEL_H

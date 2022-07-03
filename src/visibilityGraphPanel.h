@@ -11,7 +11,7 @@ class VisibilityGraphPanel : public wxPanel
 {
 public:
     VisibilityGraphPanel(wxPanel *parent);
-    wxPanel *m_parent;
+    wxPanel *pParent;
     wxBitmap m_drawing;
 
     void constructGraph();
