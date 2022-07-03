@@ -5,18 +5,18 @@
 
 void RobotGeometryPanel::OnLeftMouseClicked(wxMouseEvent &event)
 {
-    this->resetDrawing();
+    resetDrawing();
     isLeftMouseClicked = true;
 }
 
 void RobotGeometryPanel::OnLeftMouseUp(wxMouseEvent& event)
 {
-    this->checkRobotContour();
+    checkRobotContour();
 }
 
 void RobotGeometryPanel::OnRightMouseUp(wxMouseEvent& event)
 {
-    this->checkRobotContour();
+    checkRobotContour();
 }
 
 void RobotGeometryPanel::checkRobotContour()
@@ -43,11 +43,11 @@ void RobotGeometryPanel::checkRobotContour()
     float radius{0.0};
     cv::Point2f center;
     cv::minEnclosingCircle	(contours[0], center, radius);
-    this->m_robotBoundingRadius = ceil(radius);
+    m_robotBoundingRadius = ceil(radius);
 }
 
 void RobotGeometryPanel::resetDrawing()
 {
     DrawingPanel::resetDrawing();
-    this->m_robotBoundingRadius = -1; // reset this also
+    m_robotBoundingRadius = -1; // reset this also
 }
