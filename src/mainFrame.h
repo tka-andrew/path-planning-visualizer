@@ -25,7 +25,7 @@ public:
     EnvironmentGeometryPanel *pEnvironmentGeometryPanel;
     RobotGeometryPanel *pRobotGeometryPanel;
     DotPanel *pStartPosePanel;
-    DotPanel *m_goalPosePanel;
+    DotPanel *pGoalPosePanel;
     SimpleDecompositionPanel *m_simpleDecompositionPanel;
     VisibilityGraphPanel *m_visibilityGraphPanel;
     wxPanel *pParent;

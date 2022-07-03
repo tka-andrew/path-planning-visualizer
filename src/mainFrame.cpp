@@ -18,7 +18,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     pEnvironmentGeometryPanel = new EnvironmentGeometryPanel(pParent, ID_RESET_ENVIRONMENT);
     pRobotGeometryPanel = new RobotGeometryPanel(pParent, ID_RESET_ROBOT);
     pStartPosePanel = new DotPanel(pParent, wxColor(0,255,0));
-    m_goalPosePanel = new DotPanel(pParent, wxColor(255,0,0));
+    pGoalPosePanel = new DotPanel(pParent, wxColor(255,0,0));
     m_simpleDecompositionPanel = new SimpleDecompositionPanel(pParent);
     m_visibilityGraphPanel = new VisibilityGraphPanel(pParent);
 
@@ -26,7 +26,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     m_sizer->Add(pEnvironmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
     pRobotGeometryPanel->Hide();
     pStartPosePanel->Hide();
-    m_goalPosePanel->Hide();
+    pGoalPosePanel->Hide();
     m_simpleDecompositionPanel->Hide();
     m_visibilityGraphPanel->Hide();
 
@@ -74,7 +74,7 @@ void MainFrame::switchPanel(int panelNum)
     pEnvironmentGeometryPanel->Hide();
     pRobotGeometryPanel->Hide();
     pStartPosePanel->Hide();
-    m_goalPosePanel->Hide();
+    pGoalPosePanel->Hide();
     m_simpleDecompositionPanel->Hide();
     m_visibilityGraphPanel->Hide();
     this->m_lp->m_startSimulation->Disable();
@@ -95,20 +95,20 @@ void MainFrame::switchPanel(int panelNum)
         pStartPosePanel->Show();
         break;
     case 4:
-        m_sizer->Add(m_goalPosePanel, 1, wxGROW);
-        m_goalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
-        m_goalPosePanel->Show();
+        m_sizer->Add(pGoalPosePanel, 1, wxGROW);
+        pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
+        pGoalPosePanel->Show();
         break;
     case 5:
         m_sizer->Add(m_simpleDecompositionPanel, 1, wxGROW);
-        m_goalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
+        pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         m_simpleDecompositionPanel->simpleCellDecomposition(); // update the grid
         m_simpleDecompositionPanel->Show();
         this->m_lp->m_startSimulation->Enable();
         break;
     case 6:
         m_sizer->Add(m_visibilityGraphPanel, 1, wxGROW);
-        m_goalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
+        pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         m_visibilityGraphPanel->constructGraph();
         m_visibilityGraphPanel->Show();
         this->m_lp->m_startSimulation->Enable();

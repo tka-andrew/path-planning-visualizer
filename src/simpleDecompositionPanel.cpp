@@ -77,7 +77,7 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
     this->resetGrid(); // reset the grid in case any changes
     
     MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
-    cv::Mat cspaceMatImg = mainFrame->m_goalPosePanel->m_cspaceMatImg;
+    cv::Mat cspaceMatImg = mainFrame->pGoalPosePanel->m_cspaceMatImg;
     cv::Mat cspaceMatImg_gray;
     cv::cvtColor(cspaceMatImg.clone(), cspaceMatImg_gray, cv::COLOR_BGR2GRAY);
 
@@ -130,8 +130,8 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
     // Take note that x,y in grid and image/wxbitmap are in opposite
     int startPoseGridX = mainFrame->pStartPosePanel->dotPoseY / pixel_height_per_grid;
     int startPoseGridY = mainFrame->pStartPosePanel->dotPoseX / pixel_width_per_grid;
-    int goalPoseGridX = mainFrame->m_goalPosePanel->dotPoseY  / pixel_height_per_grid;
-    int goalPoseGridY = mainFrame->m_goalPosePanel->dotPoseX / pixel_width_per_grid;
+    int goalPoseGridX = mainFrame->pGoalPosePanel->dotPoseY  / pixel_height_per_grid;
+    int goalPoseGridY = mainFrame->pGoalPosePanel->dotPoseX / pixel_width_per_grid;
 
     startingPoint = {startPoseGridX, startPoseGridY};
     destinationPoint = {goalPoseGridX, goalPoseGridY};

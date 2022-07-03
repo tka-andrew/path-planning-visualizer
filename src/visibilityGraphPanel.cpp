@@ -24,7 +24,7 @@ void VisibilityGraphPanel::constructGraph()
 {
     MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
-    cv::Mat cspaceMatImg = mainFrame->m_goalPosePanel->m_cspaceMatImg;
+    cv::Mat cspaceMatImg = mainFrame->pGoalPosePanel->m_cspaceMatImg;
     cv::Mat cspaceMatImg_gray;
     cv::cvtColor(cspaceMatImg.clone(), cspaceMatImg_gray, cv::COLOR_BGR2GRAY);
 
@@ -89,7 +89,7 @@ void VisibilityGraphPanel::constructGraph()
 
     cv::imshow( "Hull demo", drawing );
 
-    m_drawing = wxBitmap(mainFrame->m_goalPosePanel->m_cspace);
+    m_drawing = wxBitmap(mainFrame->pGoalPosePanel->m_cspace);
     this->Refresh();
 }
 
