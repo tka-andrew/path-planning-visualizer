@@ -287,5 +287,5 @@ void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
         return;
     }
 
-    wxLogMessage("Number of cells visited: %d\nNumber of cell checking occurence: %d\nTravel cost %d", numOfCellsVisited, numOfCellCheckingOccurrence, travelCost);
+    wxLogMessage("Number of cells visited: %d\nNumber of cell checking occurence: %d\nTravel cost: %d", numOfCellsVisited, numOfCellCheckingOccurrence, travelCost);
 }
