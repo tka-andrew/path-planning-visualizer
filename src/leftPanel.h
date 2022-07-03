@@ -16,14 +16,14 @@ public:
     void onPathFinding(wxCommandEvent &event);
     void onStartSimulation(wxCommandEvent &WXUNUSED(event));
     void SimpleDecompositionPathFinding(wxString algoSelected);
-    wxButton *m_defineEnvironment;
-    wxButton *m_defineRobot;
-    wxButton *m_defineStartPose;
-    wxButton *m_defineGoalPose;
-    wxButton *m_pathFinding;
-    wxButton *m_startSimulation;
-    wxComboBox *m_decompositionSelection;
-    wxComboBox *m_algoSelection;
+    wxButton *pDefineEnvironmentBtn;
+    wxButton *pDefineRobotBtn;
+    wxButton *pDefineStartPoseBtn;
+    wxButton *pDefineGoalPoseBtn;
+    wxButton *pPathFindingBtn;
+    wxButton *pStartSimulationBtn;
+    wxComboBox *pDecompositionSelection;
+    wxComboBox *pAlgoSelection;
     wxPanel *pParent;
 };
 

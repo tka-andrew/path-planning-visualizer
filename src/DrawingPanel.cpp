@@ -15,13 +15,13 @@ DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
     : wxPanel(parent, wxID_ANY, wxDefaultPosition,
               wxSize(-1, -1), wxBORDER_SUNKEN)
 {
-    m_resetDrawing = new wxButton(this, resetButtonID, wxT("Reset"),
+    pResetDrawingBtn = new wxButton(this, resetButtonID, wxT("Reset"),
                                   wxPoint(5, 5));
     Connect(resetButtonID, wxEVT_COMMAND_BUTTON_CLICKED,
             wxCommandEventHandler(DrawingPanel::onResetDrawing));
 
     wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
-    vbox->Add(m_resetDrawing, 0, wxSHAPED, 0);
+    vbox->Add(pResetDrawingBtn, 0, wxSHAPED, 0);
     this->SetSizer(vbox);
 
     // REFERENCE: https://docs.wxwidgets.org/3.0/classwx_auto_buffered_paint_d_c.html

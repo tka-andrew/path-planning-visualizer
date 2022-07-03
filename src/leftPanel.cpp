@@ -6,19 +6,19 @@ LeftPanel::LeftPanel(wxPanel *parent)
     : wxPanel(parent, -1, wxPoint(-1, -1), wxSize(200, 200), wxBORDER_SUNKEN)
 {
     pParent = parent;
-    m_defineEnvironment = new wxButton(this, ID_DEFINE_ENVIRONMENT, wxT("Define environment"));
-    m_defineRobot = new wxButton(this, ID_DEFINE_ROBOT, wxT("Define robot"));
-    m_defineStartPose = new wxButton(this, ID_DEFINE_START, wxT("Define Start"));
-    m_defineGoalPose = new wxButton(this, ID_DEFINE_GOAL, wxT("Define Goal"));
-    m_pathFinding = new wxButton(this, ID_PATHFINDING, wxT("Path finding"));
-    m_startSimulation = new wxButton(this, ID_STARTSIMULATION, wxT("Start Simulation"));
-    m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200)); // initially first button is selected
-    m_startSimulation->Disable();
+    pDefineEnvironmentBtn = new wxButton(this, ID_DEFINE_ENVIRONMENT, wxT("Define environment"));
+    pDefineRobotBtn = new wxButton(this, ID_DEFINE_ROBOT, wxT("Define robot"));
+    pDefineStartPoseBtn = new wxButton(this, ID_DEFINE_START, wxT("Define Start"));
+    pDefineGoalPoseBtn = new wxButton(this, ID_DEFINE_GOAL, wxT("Define Goal"));
+    pPathFindingBtn = new wxButton(this, ID_PATHFINDING, wxT("Path finding"));
+    pStartSimulationBtn = new wxButton(this, ID_STARTSIMULATION, wxT("Start Simulation"));
+    pDefineEnvironmentBtn->SetBackgroundColour(wxColor(200,200,200)); // initially first button is selected
+    pStartSimulationBtn->Disable();
 
     wxArrayString decompositionChoices;
     decompositionChoices.Add(wxT("Simple Cell Decomposition"));
     // decompositionChoices.Add(wxT("Visibility Graph"));
-    m_decompositionSelection = new wxComboBox(this, ID_DECOMPOSTION_SELECTION, "", wxDefaultPosition, wxSize(100, -1), decompositionChoices);
+    pDecompositionSelection = new wxComboBox(this, ID_DECOMPOSTION_SELECTION, "", wxDefaultPosition, wxSize(100, -1), decompositionChoices);
 
     wxArrayString algoChoices;
     algoChoices.Add(wxT("Dijkstra"));
@@ -26,7 +26,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     algoChoices.Add(wxT("Greedy Best First Search"));
     algoChoices.Add(wxT("BFS"));
     algoChoices.Add(wxT("Bidirectional BFS"));
-    m_algoSelection = new wxComboBox(this, ID_ALGO_SELECTION, "", wxDefaultPosition, wxSize(100, -1), algoChoices);
+    pAlgoSelection = new wxComboBox(this, ID_ALGO_SELECTION, "", wxDefaultPosition, wxSize(100, -1), algoChoices);
 
     wxStaticText *comboBoxDescription1 = new wxStaticText(this, wxID_ANY, "Decomposition", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
     wxStaticText *comboBoxDescription2 = new wxStaticText(this, wxID_ANY, "Path Finding Algo", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
@@ -45,16 +45,16 @@ LeftPanel::LeftPanel(wxPanel *parent)
             wxCommandEventHandler(LeftPanel::onStartSimulation));
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
-    sizer->Add(m_defineEnvironment, 0, wxEXPAND, 0);
-    sizer->Add(m_defineRobot, 0, wxEXPAND, 0);
-    sizer->Add(m_defineStartPose, 0, wxEXPAND, 0);
-    sizer->Add(m_defineGoalPose, 0, wxEXPAND, 0);
+    sizer->Add(pDefineEnvironmentBtn, 0, wxEXPAND, 0);
+    sizer->Add(pDefineRobotBtn, 0, wxEXPAND, 0);
+    sizer->Add(pDefineStartPoseBtn, 0, wxEXPAND, 0);
+    sizer->Add(pDefineGoalPoseBtn, 0, wxEXPAND, 0);
     sizer->Add(comboBoxDescription1, 0, wxEXPAND | wxTOP, 10);
-    sizer->Add(m_decompositionSelection, 0, wxEXPAND | wxBOTTOM, 5);
-    sizer->Add(m_pathFinding, 0, wxEXPAND | wxBOTTOM, 10);
+    sizer->Add(pDecompositionSelection, 0, wxEXPAND | wxBOTTOM, 5);
+    sizer->Add(pPathFindingBtn, 0, wxEXPAND | wxBOTTOM, 10);
     sizer->Add(comboBoxDescription2, 0, wxEXPAND | wxTOP, 10);
-    sizer->Add(m_algoSelection, 0, wxEXPAND | wxBOTTOM, 5);
-    sizer->Add(m_startSimulation, 0, wxEXPAND, 0);
+    sizer->Add(pAlgoSelection, 0, wxEXPAND | wxBOTTOM, 5);
+    sizer->Add(pStartSimulationBtn, 0, wxEXPAND, 0);
     sizer->SetSizeHints(this);
     this->SetSizer(sizer);
 }
@@ -64,11 +64,11 @@ void LeftPanel::onDefineEnvironment(wxCommandEvent &WXUNUSED(event))
     MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
     if (pMainFrame->currentPanel != 1)
     {
-        m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200));
-        m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
-        m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
-        m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
-        m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
+        pDefineEnvironmentBtn->SetBackgroundColour(wxColor(200,200,200));
+        pDefineRobotBtn->SetBackgroundColour(wxColor(255,255,255));
+        pDefineStartPoseBtn->SetBackgroundColour(wxColor(255,255,255));
+        pDefineGoalPoseBtn->SetBackgroundColour(wxColor(255,255,255));
+        pPathFindingBtn->SetBackgroundColour(wxColor(255,255,255));
         pMainFrame->switchPanel(1);
         pMainFrame->currentPanel = 1;
     }
@@ -79,11 +79,11 @@ void LeftPanel::onDefineRobot(wxCommandEvent &WXUNUSED(event))
     MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
     if (pMainFrame->currentPanel != 2)
     {
-        m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
-        m_defineRobot->SetBackgroundColour(wxColor(200,200,200));
-        m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
-        m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
-        m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
+        pDefineEnvironmentBtn->SetBackgroundColour(wxColor(255,255,255));
+        pDefineRobotBtn->SetBackgroundColour(wxColor(200,200,200));
+        pDefineStartPoseBtn->SetBackgroundColour(wxColor(255,255,255));
+        pDefineGoalPoseBtn->SetBackgroundColour(wxColor(255,255,255));
+        pPathFindingBtn->SetBackgroundColour(wxColor(255,255,255));
         pMainFrame->switchPanel(2);
         pMainFrame->currentPanel = 2;
     }
@@ -101,11 +101,11 @@ void LeftPanel::onDefineStart(wxCommandEvent &WXUNUSED(event))
 
     if (pMainFrame->currentPanel != 3)
     {
-        m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
-        m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
-        m_defineStartPose->SetBackgroundColour(wxColor(200,200,200));
-        m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
-        m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
+        pDefineEnvironmentBtn->SetBackgroundColour(wxColor(255,255,255));
+        pDefineRobotBtn->SetBackgroundColour(wxColor(255,255,255));
+        pDefineStartPoseBtn->SetBackgroundColour(wxColor(200,200,200));
+        pDefineGoalPoseBtn->SetBackgroundColour(wxColor(255,255,255));
+        pPathFindingBtn->SetBackgroundColour(wxColor(255,255,255));
         pMainFrame->switchPanel(3);
         pMainFrame->currentPanel = 3;
     }
@@ -131,11 +131,11 @@ void LeftPanel::onDefineGoal(wxCommandEvent &WXUNUSED(event))
 
     if (pMainFrame->currentPanel != 4)
     {
-        m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
-        m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
-        m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
-        m_defineGoalPose->SetBackgroundColour(wxColor(200,200,200));
-        m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
+        pDefineEnvironmentBtn->SetBackgroundColour(wxColor(255,255,255));
+        pDefineRobotBtn->SetBackgroundColour(wxColor(255,255,255));
+        pDefineStartPoseBtn->SetBackgroundColour(wxColor(255,255,255));
+        pDefineGoalPoseBtn->SetBackgroundColour(wxColor(200,200,200));
+        pPathFindingBtn->SetBackgroundColour(wxColor(255,255,255));
         pMainFrame->switchPanel(4);
         pMainFrame->currentPanel = 4;
     }
@@ -144,7 +144,7 @@ void LeftPanel::onDefineGoal(wxCommandEvent &WXUNUSED(event))
 void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
 {
 
-    if (m_decompositionSelection->GetSelection() == wxNOT_FOUND)
+    if (pDecompositionSelection->GetSelection() == wxNOT_FOUND)
     {
         wxLogMessage("Please select one of the decomposition methods first.");
         return;
@@ -173,13 +173,13 @@ void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
         return;
     }
 
-    m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
-    m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
-    m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
-    m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
-    m_pathFinding->SetBackgroundColour(wxColor(200,200,200));
+    pDefineEnvironmentBtn->SetBackgroundColour(wxColor(255,255,255));
+    pDefineRobotBtn->SetBackgroundColour(wxColor(255,255,255));
+    pDefineStartPoseBtn->SetBackgroundColour(wxColor(255,255,255));
+    pDefineGoalPoseBtn->SetBackgroundColour(wxColor(255,255,255));
+    pPathFindingBtn->SetBackgroundColour(wxColor(200,200,200));
 
-    auto decompositionSelected = m_decompositionSelection->GetStringSelection();
+    auto decompositionSelected = pDecompositionSelection->GetStringSelection();
 
     if (decompositionSelected == wxString("Simple Cell Decomposition") && pMainFrame->currentPanel != 5)
     {
@@ -196,14 +196,14 @@ void LeftPanel::onStartSimulation(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
 
-    if (m_algoSelection->GetSelection() == wxNOT_FOUND)
+    if (pAlgoSelection->GetSelection() == wxNOT_FOUND)
     {
         wxLogMessage("Please select one of the path finding algorithms first.");
         return;
     }
 
-    auto algoSelected = m_algoSelection->GetStringSelection();
-    auto decompositionSelected = m_decompositionSelection->GetStringSelection();
+    auto algoSelected = pAlgoSelection->GetStringSelection();
+    auto decompositionSelected = pDecompositionSelection->GetStringSelection();
 
     if (decompositionSelected == wxString("Simple Cell Decomposition"))
     {

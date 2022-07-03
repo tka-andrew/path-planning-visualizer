@@ -77,7 +77,7 @@ void MainFrame::switchPanel(int panelNum)
     pGoalPosePanel->Hide();
     pSimpleDecompositionPanel->Hide();
     pVisibilityGraphPanel->Hide();
-    pLeftPanel->m_startSimulation->Disable();
+    pLeftPanel->pStartSimulationBtn->Disable();
 
     switch (panelNum)
     {
@@ -104,14 +104,14 @@ void MainFrame::switchPanel(int panelNum)
         pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         pSimpleDecompositionPanel->simpleCellDecomposition(); // update the grid
         pSimpleDecompositionPanel->Show();
-        pLeftPanel->m_startSimulation->Enable();
+        pLeftPanel->pStartSimulationBtn->Enable();
         break;
     case VISIBILITY_GRAPH_PANEL:
         pSizer->Add(pVisibilityGraphPanel, 1, wxGROW);
         pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         pVisibilityGraphPanel->constructGraph();
         pVisibilityGraphPanel->Show();
-        pLeftPanel->m_startSimulation->Enable();
+        pLeftPanel->pStartSimulationBtn->Enable();
         break;
     }
     pSizer->Layout();

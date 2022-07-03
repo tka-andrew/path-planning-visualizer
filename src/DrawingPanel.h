@@ -11,7 +11,7 @@ class DrawingPanel : public wxPanel
 {
 public:
     DrawingPanel(wxPanel *parent,  int resetButtonID);
-    wxButton *m_resetDrawing;
+    wxButton *pResetDrawingBtn;
     wxBitmap m_drawing;
 
     void onResetDrawing(wxCommandEvent &event);
