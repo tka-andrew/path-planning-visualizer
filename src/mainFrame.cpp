@@ -81,32 +81,32 @@ void MainFrame::switchPanel(int panelNum)
 
     switch (panelNum)
     {
-    case 1:
+    case ENVIRONMENT_PANEL:
         pSizer->Add(pEnvironmentGeometryPanel, 1, wxGROW);
         pEnvironmentGeometryPanel->Show();
         break;
-    case 2:
+    case ROBOT_PANEL:
         pSizer->Add(pRobotGeometryPanel, 1, wxGROW);
         pRobotGeometryPanel->Show();
         break;
-    case 3:
+    case START_PANEL:
         pSizer->Add(pStartPosePanel, 1, wxGROW);
         pStartPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         pStartPosePanel->Show();
         break;
-    case 4:
+    case GOAL_PANEL:
         pSizer->Add(pGoalPosePanel, 1, wxGROW);
         pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         pGoalPosePanel->Show();
         break;
-    case 5:
+    case SIMPLE_CELL_DECOMPOSITION_PANEL:
         pSizer->Add(pSimpleDecompositionPanel, 1, wxGROW);
         pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         pSimpleDecompositionPanel->simpleCellDecomposition(); // update the grid
         pSimpleDecompositionPanel->Show();
         this->pLeftPanel->m_startSimulation->Enable();
         break;
-    case 6:
+    case VISIBILITY_GRAPH_PANEL:
         pSizer->Add(pVisibilityGraphPanel, 1, wxGROW);
         pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         pVisibilityGraphPanel->constructGraph();
