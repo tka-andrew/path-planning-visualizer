@@ -144,7 +144,7 @@ void LeftPanel::onDefineGoal(wxCommandEvent &WXUNUSED(event))
 void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
 {
 
-    if (this->m_decompositionSelection->GetSelection() == wxNOT_FOUND)
+    if (m_decompositionSelection->GetSelection() == wxNOT_FOUND)
     {
         wxLogMessage("Please select one of the decomposition methods first.");
         return;
@@ -179,7 +179,7 @@ void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
     m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
     m_pathFinding->SetBackgroundColour(wxColor(200,200,200));
 
-    auto decompositionSelected = this->m_decompositionSelection->GetStringSelection();
+    auto decompositionSelected = m_decompositionSelection->GetStringSelection();
 
     if (decompositionSelected == wxString("Simple Cell Decomposition") && pMainFrame->currentPanel != 5)
     {
@@ -196,16 +196,14 @@ void LeftPanel::onStartSimulation(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
 
-    if (this->m_algoSelection->GetSelection() == wxNOT_FOUND)
+    if (m_algoSelection->GetSelection() == wxNOT_FOUND)
     {
         wxLogMessage("Please select one of the path finding algorithms first.");
         return;
     }
 
-    // clearSearch(); // clearSearch before starting simulation
-
-    auto algoSelected = this->m_algoSelection->GetStringSelection();
-    auto decompositionSelected = this->m_decompositionSelection->GetStringSelection();
+    auto algoSelected = m_algoSelection->GetStringSelection();
+    auto decompositionSelected = m_decompositionSelection->GetStringSelection();
 
     if (decompositionSelected == wxString("Simple Cell Decomposition"))
     {

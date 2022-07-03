@@ -37,7 +37,7 @@ void SimpleDecompositionPanel::resetGrid()
     {
         for (int j = 0; j < this->gridCol; j++)
         {
-            this->pGrid->SetCellBackgroundColour(i, j, wxColour(255, 255, 255));
+            pGrid->SetCellBackgroundColour(i, j, wxColour(255, 255, 255));
         }
     }
 }
@@ -100,7 +100,7 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
                 cv::Mat roi = cspaceMatImg_gray(cv::Rect(x, y, pixel_width_per_grid, imgHeight-y));
                 if (hasObstacle(roi))
                 {
-                    this->pGrid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
+                    pGrid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
                 }
             }
             break;
@@ -112,7 +112,7 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
                 cv::Mat roi = cspaceMatImg_gray(cv::Rect(x, y, imgWidth-x, pixel_height_per_grid));
                 if (hasObstacle(roi))
                 {
-                    this->pGrid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
+                    pGrid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
                 }
                 break;
             }
@@ -120,7 +120,7 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
             cv::Mat roi = cspaceMatImg_gray(cv::Rect(x, y, pixel_width_per_grid, pixel_height_per_grid));
             if (hasObstacle(roi))
             {
-                this->pGrid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
+                pGrid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
             }
             x += pixel_width_per_grid;
         }
@@ -136,11 +136,11 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
     startingPoint = {startPoseGridX, startPoseGridY};
     destinationPoint = {goalPoseGridX, goalPoseGridY};
 
-    this->paintStartAndGoal();
+    paintStartAndGoal();
 }
 
 void SimpleDecompositionPanel::paintStartAndGoal()
 {
-    this->pGrid->SetCellBackgroundColour(startingPoint[0], startingPoint[1], wxColour(0,255,0));
-    this->pGrid->SetCellBackgroundColour(destinationPoint[0], destinationPoint[1], wxColour(255,0,0));
+    pGrid->SetCellBackgroundColour(startingPoint[0], startingPoint[1], wxColour(0,255,0));
+    pGrid->SetCellBackgroundColour(destinationPoint[0], destinationPoint[1], wxColour(255,0,0));
 }
