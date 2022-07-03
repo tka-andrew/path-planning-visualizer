@@ -70,9 +70,8 @@ void DotPanel::OnPaint(wxPaintEvent &evt)
 {
     if (dotPoseX != -1 && dotPoseY != -1)
     {
-        wxMemoryDC mdc(m_drawing);
+        wxMemoryDC mdc(m_drawing); // Constructs a new memory device context and calls SelectObject() with the given bitmap.
 
-        mdc.SelectObject(m_drawing);
         mdc.SetBrush(m_dotColor);
         mdc.SetPen(wxPen(m_dotColor, 5));
 
@@ -121,9 +120,8 @@ void DotPanel::OnLeftMouseClicked(wxMouseEvent &event)
     // wxClientDC for visualization
     // wxMemoryDC for updating the bitmap, so that later wxAutoBufferedPaintDC can draw it in OnPaint() function
     wxClientDC cdc = wxClientDC(this);
-    wxMemoryDC mdc(m_drawing);
+    wxMemoryDC mdc(m_drawing); // Constructs a new memory device context and calls SelectObject() with the given bitmap.
 
-    mdc.SelectObject(m_drawing);
     cdc.SetPen(wxPen(m_dotColor, 5));
     cdc.SetBrush(m_dotColor);
     mdc.SetBrush(cdc.GetBrush());
@@ -134,6 +132,10 @@ void DotPanel::OnLeftMouseClicked(wxMouseEvent &event)
 
     cdc.SetPen(wxNullPen);
     mdc.SetPen(wxNullPen);
+
+    // before performing any other operations on the bitmap data, 
+    // the bitmap must be selected out of the memory DC
     mdc.SelectObject(wxNullBitmap);
+
     this->Refresh(); // to trigger refresh
 }

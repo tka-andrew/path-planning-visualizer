@@ -31,8 +31,8 @@ public:
     wxDECLARE_EVENT_TABLE();
 
 private:
-    int clientAreaWidth = 10; // dummy value, will be updated OnResize()
-    int clientAreaHeight = 10; // dummy value, will be updated OnResize()
+    int clientAreaWidth = 10; // dummy value, will be updated OnSize()
+    int clientAreaHeight = 10; // dummy value, will be updated OnSize()
     bool initialSizeTaken = false;
 };
 

@@ -29,7 +29,7 @@ DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
 
     // in this constructor, it is impossible for us to know the size of this panel
     // hence we just simply use a small value
-    // we will re-initialize m_drawing later in OnResize() function
+    // we will re-initialize m_drawing later in OnSize() function
     wxImage emptyImage(clientAreaWidth, clientAreaHeight);
     emptyImage.Clear(255); // default white color
     m_drawing = wxBitmap(emptyImage);
@@ -102,9 +102,8 @@ void DrawingPanel::OnMotion(wxMouseEvent &event)
         // wxClientDC for visualization
         // wxMemoryDC for updating the bitmap, so that later wxAutoBufferedPaintDC can draw it in OnPaint() function
         wxClientDC cdc = wxClientDC(this);
-        wxMemoryDC mdc(m_drawing);
+        wxMemoryDC mdc(m_drawing); // Constructs a new memory device context and calls SelectObject() with the given bitmap.
 
-        mdc.SelectObject(m_drawing);
         if (isLeftMouseClicked)
         {
             cdc.SetPen(wxPen(wxColor(0, 0, 0), 10));
