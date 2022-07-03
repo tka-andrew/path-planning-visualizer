@@ -21,15 +21,15 @@ class MainFrame : public wxFrame
 {
 public:
     MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
-    LeftPanel *m_lp;
+    LeftPanel *pLeftPanel;
     EnvironmentGeometryPanel *pEnvironmentGeometryPanel;
     RobotGeometryPanel *pRobotGeometryPanel;
     DotPanel *pStartPosePanel;
     DotPanel *pGoalPosePanel;
-    SimpleDecompositionPanel *m_simpleDecompositionPanel;
-    VisibilityGraphPanel *m_visibilityGraphPanel;
+    SimpleDecompositionPanel *pSimpleDecompositionPanel;
+    VisibilityGraphPanel *pVisibilityGraphPanel;
     wxPanel *pParent;
-    wxBoxSizer *m_sizer;
+    wxBoxSizer *pSizer;
     int currentPanel = 1;
     bool canSwitchPanel();
     void switchPanel(int panelNum);

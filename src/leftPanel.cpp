@@ -61,83 +61,83 @@ LeftPanel::LeftPanel(wxPanel *parent)
 
 void LeftPanel::onDefineEnvironment(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
-    if (mainFrame->currentPanel != 1)
+    MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
+    if (pMainFrame->currentPanel != 1)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(200,200,200));
         m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
         m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
         m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
         m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
-        mainFrame->switchPanel(1);
-        mainFrame->currentPanel = 1;
+        pMainFrame->switchPanel(1);
+        pMainFrame->currentPanel = 1;
     }
 }
 
 void LeftPanel::onDefineRobot(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
-    if (mainFrame->currentPanel != 2)
+    MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
+    if (pMainFrame->currentPanel != 2)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
         m_defineRobot->SetBackgroundColour(wxColor(200,200,200));
         m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
         m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
         m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
-        mainFrame->switchPanel(2);
-        mainFrame->currentPanel = 2;
+        pMainFrame->switchPanel(2);
+        pMainFrame->currentPanel = 2;
     }
 }
 
 void LeftPanel::onDefineStart(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
+    MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
 
-    if (mainFrame->pRobotGeometryPanel->m_robotBoundingRadius == -1)
+    if (pMainFrame->pRobotGeometryPanel->m_robotBoundingRadius == -1)
     {
         wxLogMessage("Please define a valid robot geometry first.");
         return;
     }
 
-    if (mainFrame->currentPanel != 3)
+    if (pMainFrame->currentPanel != 3)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
         m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
         m_defineStartPose->SetBackgroundColour(wxColor(200,200,200));
         m_defineGoalPose->SetBackgroundColour(wxColor(255,255,255));
         m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
-        mainFrame->switchPanel(3);
-        mainFrame->currentPanel = 3;
+        pMainFrame->switchPanel(3);
+        pMainFrame->currentPanel = 3;
     }
 }
 
 void LeftPanel::onDefineGoal(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
+    MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
 
-    if (mainFrame->pRobotGeometryPanel->m_robotBoundingRadius == -1)
+    if (pMainFrame->pRobotGeometryPanel->m_robotBoundingRadius == -1)
     {
         wxLogMessage("Please define a valid robot geometry first.");
         return;
     }
 
-    int startPoseX = mainFrame->pStartPosePanel->dotPoseX;
-    int startPoseY = mainFrame->pStartPosePanel->dotPoseY; 
+    int startPoseX = pMainFrame->pStartPosePanel->dotPoseX;
+    int startPoseY = pMainFrame->pStartPosePanel->dotPoseY; 
     if (startPoseX == -1 || startPoseY == -1)
     {
         wxLogMessage("Please define start pose first.");
         return;
     }
 
-    if (mainFrame->currentPanel != 4)
+    if (pMainFrame->currentPanel != 4)
     {
         m_defineEnvironment->SetBackgroundColour(wxColor(255,255,255));
         m_defineRobot->SetBackgroundColour(wxColor(255,255,255));
         m_defineStartPose->SetBackgroundColour(wxColor(255,255,255));
         m_defineGoalPose->SetBackgroundColour(wxColor(200,200,200));
         m_pathFinding->SetBackgroundColour(wxColor(255,255,255));
-        mainFrame->switchPanel(4);
-        mainFrame->currentPanel = 4;
+        pMainFrame->switchPanel(4);
+        pMainFrame->currentPanel = 4;
     }
 }
 
@@ -150,23 +150,23 @@ void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
         return;
     }
 
-    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
+    MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
 
-    if (mainFrame->pRobotGeometryPanel->m_robotBoundingRadius == -1)
+    if (pMainFrame->pRobotGeometryPanel->m_robotBoundingRadius == -1)
     {
         wxLogMessage("Please define a valid robot geometry first.");
         return;
     }
 
-    int startPoseX = mainFrame->pStartPosePanel->dotPoseX;
-    int startPoseY = mainFrame->pStartPosePanel->dotPoseY; 
+    int startPoseX = pMainFrame->pStartPosePanel->dotPoseX;
+    int startPoseY = pMainFrame->pStartPosePanel->dotPoseY; 
     if (startPoseX == -1 || startPoseY == -1)
     {
         wxLogMessage("Please define start pose & goal pose first.");
         return;
     }
-    int goalPoseX = mainFrame->pGoalPosePanel->dotPoseX;
-    int goalPoseY = mainFrame->pGoalPosePanel->dotPoseY; 
+    int goalPoseX = pMainFrame->pGoalPosePanel->dotPoseX;
+    int goalPoseY = pMainFrame->pGoalPosePanel->dotPoseY; 
     if ( goalPoseX == -1 || goalPoseY == -1)
     {
         wxLogMessage("Please define goal pose first.");
@@ -181,20 +181,20 @@ void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
 
     auto decompositionSelected = this->m_decompositionSelection->GetStringSelection();
 
-    if (decompositionSelected == wxString("Simple Cell Decomposition") && mainFrame->currentPanel != 5)
+    if (decompositionSelected == wxString("Simple Cell Decomposition") && pMainFrame->currentPanel != 5)
     {
-        mainFrame->switchPanel(5);
-        mainFrame->currentPanel = 5;
-    } else if (decompositionSelected == wxString("Visibility Graph") && mainFrame->currentPanel != 6)
+        pMainFrame->switchPanel(5);
+        pMainFrame->currentPanel = 5;
+    } else if (decompositionSelected == wxString("Visibility Graph") && pMainFrame->currentPanel != 6)
     {
-        mainFrame->switchPanel(6);
-        mainFrame->currentPanel = 6;
+        pMainFrame->switchPanel(6);
+        pMainFrame->currentPanel = 6;
     }
 }
 
 void LeftPanel::onStartSimulation(wxCommandEvent &WXUNUSED(event))
 {
-    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
+    MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
 
     if (this->m_algoSelection->GetSelection() == wxNOT_FOUND)
     {
@@ -215,9 +215,9 @@ void LeftPanel::onStartSimulation(wxCommandEvent &WXUNUSED(event))
 
 void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
 {
-    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
-    SimpleDecompositionPanel *simpleDecompositionPanelPtr = (SimpleDecompositionPanel *)mainFrame->m_simpleDecompositionPanel;
-    wxGrid *gridPtr = (wxGrid *)simpleDecompositionPanelPtr->grid;
+    MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
+    SimpleDecompositionPanel *simpleDecompositionPanelPtr = (SimpleDecompositionPanel *)pMainFrame->pSimpleDecompositionPanel;
+    wxGrid *gridPtr = (wxGrid *)simpleDecompositionPanelPtr->pGrid;
 
     simpleDecompositionPanelPtr->simpleCellDecomposition(); // to clear previous search if any
 
@@ -231,23 +231,23 @@ void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
 
     if (algoSelected == wxString("Dijkstra"))
     {
-        pathFindingResult = dijkstraSingleTarget(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+        pathFindingResult = dijkstraSingleTarget(startingPoint, destinationPoint, row, col, pMainFrame, gridPtr, true);
     }
     else if (algoSelected == wxString("A* Search"))
     {
-        pathFindingResult = aStarSearch(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+        pathFindingResult = aStarSearch(startingPoint, destinationPoint, row, col, pMainFrame, gridPtr, true);
     }
     else if (algoSelected == wxString("Greedy Best First Search"))
     {
-        pathFindingResult = greedyBestFirstSearch(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+        pathFindingResult = greedyBestFirstSearch(startingPoint, destinationPoint, row, col, pMainFrame, gridPtr, true);
     }
     else if (algoSelected == wxString("BFS"))
     {
-        pathFindingResult = bfs(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+        pathFindingResult = bfs(startingPoint, destinationPoint, row, col, pMainFrame, gridPtr, true);
     }
     else if (algoSelected == wxString("Bidirectional BFS"))
     {
-        pathFindingResult = bidirectionalBFS(startingPoint, destinationPoint, row, col, mainFrame, gridPtr, true);
+        pathFindingResult = bidirectionalBFS(startingPoint, destinationPoint, row, col, pMainFrame, gridPtr, true);
     }
     else
     {
@@ -274,8 +274,8 @@ void LeftPanel::SimpleDecompositionPathFinding(wxString algoSelected)
         pathTrackCell[1] = prev[row][col][1];
 
         // INSPIRED BY: https://github.com/ArturMarekNowak/Pathfinding-Visualization/blob/master/SourceFiles/cMain.cpp
-        mainFrame->Update();
-        mainFrame->Refresh(false);
+        pMainFrame->Update();
+        pMainFrame->Refresh(false);
     }
 
     simpleDecompositionPanelPtr->paintStartAndGoal();

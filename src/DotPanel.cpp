@@ -24,9 +24,9 @@ DotPanel::DotPanel(wxPanel *parent, wxColor dotColor)
 
 void DotPanel::resetDrawing()
 {
-    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
+    MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
 
-    wxBitmap environmentDrawing = wxBitmap(mainFrame->pEnvironmentGeometryPanel->m_drawing);
+    wxBitmap environmentDrawing = wxBitmap(pMainFrame->pEnvironmentGeometryPanel->m_drawing);
     wxImage environmentDrawing_img = environmentDrawing.ConvertToImage();
     cv::Mat environmentImg = OpenCV_wxWidgets::cvMat_from_wxImage( environmentDrawing_img );
     cv::Mat environmentImg_gray;
@@ -38,7 +38,7 @@ void DotPanel::resetDrawing()
     cv::findContours(environmentImg_thresh, contours, hierarchy, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE );
     cv::Mat originalThresh = cv::Mat::zeros( environmentImg_gray.size(), CV_8UC3 );
     cv::Mat cspace = cv::Mat::zeros( environmentImg_gray.size(), CV_8UC3 );
-    float contourRadius = mainFrame->pRobotGeometryPanel->m_robotBoundingRadius;
+    float contourRadius = pMainFrame->pRobotGeometryPanel->m_robotBoundingRadius;
     contourRadius += contourRadius; // the contour is actually drawn along the edge of contour, so we need another half of it
     for( size_t i = 0; i< contours.size(); i++ )
     {
@@ -88,9 +88,9 @@ void DotPanel::onSize(wxSizeEvent &evt)
 {
     if (!initialSizeTaken)
     {
-        MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
-        clientAreaHeight = mainFrame->pEnvironmentGeometryPanel->getClientAreaHeight();
-        clientAreaWidth = mainFrame->pEnvironmentGeometryPanel->getClientAreaWidth();
+        MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
+        clientAreaHeight = pMainFrame->pEnvironmentGeometryPanel->getClientAreaHeight();
+        clientAreaWidth = pMainFrame->pEnvironmentGeometryPanel->getClientAreaWidth();
         this->resetDrawing();
         initialSizeTaken = true; // to ensure a fixed size bitmap
     }

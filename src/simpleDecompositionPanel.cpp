@@ -14,21 +14,21 @@ SimpleDecompositionPanel::SimpleDecompositionPanel(wxPanel *parent, int gridRow,
     this->gridColSize = gridColSize;
 
     // Create a wxGrid object
-    grid = new wxGrid(this, wxID_ANY);
+    pGrid = new wxGrid(this, wxID_ANY);
 
     // This 2 lines must be executed before CreateGrid()
-    grid->SetDefaultColSize(this->gridRowSize);
-    grid->SetDefaultRowSize(this->gridColSize);
+    pGrid->SetDefaultColSize(this->gridRowSize);
+    pGrid->SetDefaultRowSize(this->gridColSize);
 
-    grid->CreateGrid(this->gridRow, this->gridCol);
+    pGrid->CreateGrid(this->gridRow, this->gridCol);
 
-    grid->DisableDragGridSize();
-    grid->EnableEditing(false);
-    grid->HideRowLabels();
-    grid->HideColLabels();
-    m_sizer = new wxBoxSizer(wxVERTICAL);
-    m_sizer->Add(grid, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALL, 20);
-    this->SetSizer(m_sizer);
+    pGrid->DisableDragGridSize();
+    pGrid->EnableEditing(false);
+    pGrid->HideRowLabels();
+    pGrid->HideColLabels();
+    pSizer = new wxBoxSizer(wxVERTICAL);
+    pSizer->Add(pGrid, 1, wxEXPAND | wxALIGN_CENTER_HORIZONTAL | wxALL, 20);
+    this->SetSizer(pSizer);
 }
 
 void SimpleDecompositionPanel::resetGrid()
@@ -37,7 +37,7 @@ void SimpleDecompositionPanel::resetGrid()
     {
         for (int j = 0; j < this->gridCol; j++)
         {
-            this->grid->SetCellBackgroundColour(i, j, wxColour(255, 255, 255));
+            this->pGrid->SetCellBackgroundColour(i, j, wxColour(255, 255, 255));
         }
     }
 }
@@ -74,10 +74,10 @@ bool hasObstacle(cv::Mat &roi)
 
 void SimpleDecompositionPanel::simpleCellDecomposition()
 {
-    this->resetGrid(); // reset the grid in case any changes
+    this->resetGrid(); // reset the pGrid in case any changes
     
-    MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
-    cv::Mat cspaceMatImg = mainFrame->pGoalPosePanel->m_cspaceMatImg;
+    MainFrame *pMainFrame = (MainFrame *)pParent->GetParent();
+    cv::Mat cspaceMatImg = pMainFrame->pGoalPosePanel->m_cspaceMatImg;
     cv::Mat cspaceMatImg_gray;
     cv::cvtColor(cspaceMatImg.clone(), cspaceMatImg_gray, cv::COLOR_BGR2GRAY);
 
@@ -100,7 +100,7 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
                 cv::Mat roi = cspaceMatImg_gray(cv::Rect(x, y, pixel_width_per_grid, imgHeight-y));
                 if (hasObstacle(roi))
                 {
-                    this->grid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
+                    this->pGrid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
                 }
             }
             break;
@@ -112,7 +112,7 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
                 cv::Mat roi = cspaceMatImg_gray(cv::Rect(x, y, imgWidth-x, pixel_height_per_grid));
                 if (hasObstacle(roi))
                 {
-                    this->grid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
+                    this->pGrid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
                 }
                 break;
             }
@@ -120,7 +120,7 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
             cv::Mat roi = cspaceMatImg_gray(cv::Rect(x, y, pixel_width_per_grid, pixel_height_per_grid));
             if (hasObstacle(roi))
             {
-                this->grid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
+                this->pGrid->SetCellBackgroundColour(i, j, wxColour(0,0,0));
             }
             x += pixel_width_per_grid;
         }
@@ -128,10 +128,10 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
     }
 
     // Take note that x,y in grid and image/wxbitmap are in opposite
-    int startPoseGridX = mainFrame->pStartPosePanel->dotPoseY / pixel_height_per_grid;
-    int startPoseGridY = mainFrame->pStartPosePanel->dotPoseX / pixel_width_per_grid;
-    int goalPoseGridX = mainFrame->pGoalPosePanel->dotPoseY  / pixel_height_per_grid;
-    int goalPoseGridY = mainFrame->pGoalPosePanel->dotPoseX / pixel_width_per_grid;
+    int startPoseGridX = pMainFrame->pStartPosePanel->dotPoseY / pixel_height_per_grid;
+    int startPoseGridY = pMainFrame->pStartPosePanel->dotPoseX / pixel_width_per_grid;
+    int goalPoseGridX = pMainFrame->pGoalPosePanel->dotPoseY  / pixel_height_per_grid;
+    int goalPoseGridY = pMainFrame->pGoalPosePanel->dotPoseX / pixel_width_per_grid;
 
     startingPoint = {startPoseGridX, startPoseGridY};
     destinationPoint = {goalPoseGridX, goalPoseGridY};
@@ -141,6 +141,6 @@ void SimpleDecompositionPanel::simpleCellDecomposition()
 
 void SimpleDecompositionPanel::paintStartAndGoal()
 {
-    this->grid->SetCellBackgroundColour(startingPoint[0], startingPoint[1], wxColour(0,255,0));
-    this->grid->SetCellBackgroundColour(destinationPoint[0], destinationPoint[1], wxColour(255,0,0));
+    this->pGrid->SetCellBackgroundColour(startingPoint[0], startingPoint[1], wxColour(0,255,0));
+    this->pGrid->SetCellBackgroundColour(destinationPoint[0], destinationPoint[1], wxColour(255,0,0));
 }

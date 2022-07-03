@@ -15,9 +15,9 @@ public:
     void simpleCellDecomposition();
     void resetGrid();
     void paintStartAndGoal();
-    wxGrid *grid;
+    wxGrid *pGrid;
     wxPanel *pParent;
-    wxBoxSizer *m_sizer;
+    wxBoxSizer *pSizer;
     int gridRow;
     int gridCol;
     int gridRowSize;

@@ -12,25 +12,25 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
 
     pParent = new wxPanel(this, wxID_ANY);
 
-    m_sizer = new wxBoxSizer(wxHORIZONTAL);
+    pSizer = new wxBoxSizer(wxHORIZONTAL);
 
-    m_lp = new LeftPanel(pParent);
+    pLeftPanel = new LeftPanel(pParent);
     pEnvironmentGeometryPanel = new EnvironmentGeometryPanel(pParent, ID_RESET_ENVIRONMENT);
     pRobotGeometryPanel = new RobotGeometryPanel(pParent, ID_RESET_ROBOT);
     pStartPosePanel = new DotPanel(pParent, wxColor(0,255,0));
     pGoalPosePanel = new DotPanel(pParent, wxColor(255,0,0));
-    m_simpleDecompositionPanel = new SimpleDecompositionPanel(pParent);
-    m_visibilityGraphPanel = new VisibilityGraphPanel(pParent);
+    pSimpleDecompositionPanel = new SimpleDecompositionPanel(pParent);
+    pVisibilityGraphPanel = new VisibilityGraphPanel(pParent);
 
-    m_sizer->Add(m_lp, 0, wxSHAPED, 5);
-    m_sizer->Add(pEnvironmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
+    pSizer->Add(pLeftPanel, 0, wxSHAPED, 5);
+    pSizer->Add(pEnvironmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
     pRobotGeometryPanel->Hide();
     pStartPosePanel->Hide();
     pGoalPosePanel->Hide();
-    m_simpleDecompositionPanel->Hide();
-    m_visibilityGraphPanel->Hide();
+    pSimpleDecompositionPanel->Hide();
+    pVisibilityGraphPanel->Hide();
 
-    pParent->SetSizer(m_sizer);
+    pParent->SetSizer(pSizer);
 
     this->Centre();
 
@@ -70,49 +70,49 @@ void MainFrame::onUsageGuide(wxCommandEvent &event)
 
 void MainFrame::switchPanel(int panelNum)
 {
-    m_sizer->Detach(1); // remove panel 1, which is the right panel
+    pSizer->Detach(1); // remove panel 1, which is the right panel
     pEnvironmentGeometryPanel->Hide();
     pRobotGeometryPanel->Hide();
     pStartPosePanel->Hide();
     pGoalPosePanel->Hide();
-    m_simpleDecompositionPanel->Hide();
-    m_visibilityGraphPanel->Hide();
-    this->m_lp->m_startSimulation->Disable();
+    pSimpleDecompositionPanel->Hide();
+    pVisibilityGraphPanel->Hide();
+    this->pLeftPanel->m_startSimulation->Disable();
 
     switch (panelNum)
     {
     case 1:
-        m_sizer->Add(pEnvironmentGeometryPanel, 1, wxGROW);
+        pSizer->Add(pEnvironmentGeometryPanel, 1, wxGROW);
         pEnvironmentGeometryPanel->Show();
         break;
     case 2:
-        m_sizer->Add(pRobotGeometryPanel, 1, wxGROW);
+        pSizer->Add(pRobotGeometryPanel, 1, wxGROW);
         pRobotGeometryPanel->Show();
         break;
     case 3:
-        m_sizer->Add(pStartPosePanel, 1, wxGROW);
+        pSizer->Add(pStartPosePanel, 1, wxGROW);
         pStartPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         pStartPosePanel->Show();
         break;
     case 4:
-        m_sizer->Add(pGoalPosePanel, 1, wxGROW);
+        pSizer->Add(pGoalPosePanel, 1, wxGROW);
         pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
         pGoalPosePanel->Show();
         break;
     case 5:
-        m_sizer->Add(m_simpleDecompositionPanel, 1, wxGROW);
+        pSizer->Add(pSimpleDecompositionPanel, 1, wxGROW);
         pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
-        m_simpleDecompositionPanel->simpleCellDecomposition(); // update the grid
-        m_simpleDecompositionPanel->Show();
-        this->m_lp->m_startSimulation->Enable();
+        pSimpleDecompositionPanel->simpleCellDecomposition(); // update the grid
+        pSimpleDecompositionPanel->Show();
+        this->pLeftPanel->m_startSimulation->Enable();
         break;
     case 6:
-        m_sizer->Add(m_visibilityGraphPanel, 1, wxGROW);
+        pSizer->Add(pVisibilityGraphPanel, 1, wxGROW);
         pGoalPosePanel->resetDrawing(); // necessary to update in case robot or enviroment updated 
-        m_visibilityGraphPanel->constructGraph();
-        m_visibilityGraphPanel->Show();
-        this->m_lp->m_startSimulation->Enable();
+        pVisibilityGraphPanel->constructGraph();
+        pVisibilityGraphPanel->Show();
+        this->pLeftPanel->m_startSimulation->Enable();
         break;
     }
-    m_sizer->Layout();
+    pSizer->Layout();
 }
