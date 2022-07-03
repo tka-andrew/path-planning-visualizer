@@ -15,7 +15,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     m_sizer = new wxBoxSizer(wxHORIZONTAL);
 
     m_lp = new LeftPanel(pParent);
-    m_environmentGeometryPanel = new EnvironmentGeometryPanel(pParent, ID_RESET_ENVIRONMENT);
+    pEnvironmentGeometryPanel = new EnvironmentGeometryPanel(pParent, ID_RESET_ENVIRONMENT);
     m_robotGeometryPanel = new RobotGeometryPanel(pParent, ID_RESET_ROBOT);
     m_startPosePanel = new DotPanel(pParent, wxColor(0,255,0));
     m_goalPosePanel = new DotPanel(pParent, wxColor(255,0,0));
@@ -23,7 +23,7 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     m_visibilityGraphPanel = new VisibilityGraphPanel(pParent);
 
     m_sizer->Add(m_lp, 0, wxSHAPED, 5);
-    m_sizer->Add(m_environmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
+    m_sizer->Add(pEnvironmentGeometryPanel, 1, wxEXPAND, 5); // only add environmentGeometryPanel initially, hide the rest
     m_robotGeometryPanel->Hide();
     m_startPosePanel->Hide();
     m_goalPosePanel->Hide();
@@ -71,7 +71,7 @@ void MainFrame::onUsageGuide(wxCommandEvent &event)
 void MainFrame::switchPanel(int panelNum)
 {
     m_sizer->Detach(1); // remove panel 1, which is the right panel
-    m_environmentGeometryPanel->Hide();
+    pEnvironmentGeometryPanel->Hide();
     m_robotGeometryPanel->Hide();
     m_startPosePanel->Hide();
     m_goalPosePanel->Hide();
@@ -82,8 +82,8 @@ void MainFrame::switchPanel(int panelNum)
     switch (panelNum)
     {
     case 1:
-        m_sizer->Add(m_environmentGeometryPanel, 1, wxGROW);
-        m_environmentGeometryPanel->Show();
+        m_sizer->Add(pEnvironmentGeometryPanel, 1, wxGROW);
+        pEnvironmentGeometryPanel->Show();
         break;
     case 2:
         m_sizer->Add(m_robotGeometryPanel, 1, wxGROW);

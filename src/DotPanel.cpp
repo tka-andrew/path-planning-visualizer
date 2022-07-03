@@ -26,7 +26,7 @@ void DotPanel::resetDrawing()
 {
     MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
 
-    wxBitmap environmentDrawing = wxBitmap(mainFrame->m_environmentGeometryPanel->m_drawing);
+    wxBitmap environmentDrawing = wxBitmap(mainFrame->pEnvironmentGeometryPanel->m_drawing);
     wxImage environmentDrawing_img = environmentDrawing.ConvertToImage();
     cv::Mat environmentImg = OpenCV_wxWidgets::cvMat_from_wxImage( environmentDrawing_img );
     cv::Mat environmentImg_gray;
@@ -89,8 +89,8 @@ void DotPanel::onSize(wxSizeEvent &evt)
     if (!initialSizeTaken)
     {
         MainFrame *mainFrame = (MainFrame *)pParent->GetParent();
-        clientAreaHeight = mainFrame->m_environmentGeometryPanel->getClientAreaHeight();
-        clientAreaWidth = mainFrame->m_environmentGeometryPanel->getClientAreaWidth();
+        clientAreaHeight = mainFrame->pEnvironmentGeometryPanel->getClientAreaHeight();
+        clientAreaWidth = mainFrame->pEnvironmentGeometryPanel->getClientAreaWidth();
         this->resetDrawing();
         initialSizeTaken = true; // to ensure a fixed size bitmap
     }

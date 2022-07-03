@@ -22,7 +22,7 @@ class MainFrame : public wxFrame
 public:
     MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size);
     LeftPanel *m_lp;
-    EnvironmentGeometryPanel *m_environmentGeometryPanel;
+    EnvironmentGeometryPanel *pEnvironmentGeometryPanel;
     RobotGeometryPanel *m_robotGeometryPanel;
     DotPanel *m_startPosePanel;
     DotPanel *m_goalPosePanel;
