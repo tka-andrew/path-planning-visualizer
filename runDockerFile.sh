@@ -11,5 +11,4 @@ sudo docker run --rm -e DISPLAY=$DISPLAY -e PULSE_SERVER=$PULSE_SERVER -v $XSOCK
                 -v ${XDG_RUNTIME_DIR}/pulse/native:${XDG_RUNTIME_DIR}/pulse/native \
                 -v ~/.config/pulse/cookie:/root/.config/pulse/cookie \
                 -e XAUTHORITY=$XAUTH -t tka-andrew/path-planning-visualizer:latest \
-                bash -c "./PathPlanningVisualizer"
-# bash -c "./test/UnitTests && ./PathPlanningVisualizer"
+                bash -c "./test/UnitTests && ./PathPlanningVisualizer"

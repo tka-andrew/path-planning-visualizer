@@ -12,7 +12,8 @@ sudo apt-get install -y libwxgtk3.0-dev  (PS: for other versions of Ubuntu)
 ```
 
 ### Install OpenCV 
-1. [Reference](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html)
+1. [Install OpenCV From Source](https://docs.opencv.org/4.x/d7/d9f/tutorial_linux_install.html)
+2. OR [Install OpenCV From Ubuntu repository](https://milq.github.io/install-opencv-ubuntu-debian/)
 
 ### CMake and build
 In this directory
@@ -28,9 +29,11 @@ cmake --build .
 ./PathPlanningVisualizer
 ```
 
-## TO-DO
-1. Support other path planning approaches such as RRT and PRM
-2. Make this project runnable as a docker container
+## RUNNING ON DOCKER CONTAINER
+```
+./buildDockerImage.sh
+./runDockerFile
+```
 
 ## Side Notes
 1. The visibilityGraphPanel in the src folder is not used, as I couldn't find any suitable OpenCV function to convert the non-polygonal contours into contours with only edges and vertices. Without the vertices, Exact Cell Decomposition and Visibility Graph wouldn't be possible. Do let me know if you have any idea in implementing them.
