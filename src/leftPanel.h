@@ -9,12 +9,12 @@ class LeftPanel : public wxPanel
 {
 public:
     LeftPanel(wxPanel *parent);
-    void OnDefineEnvironment(wxCommandEvent &event);
-    void OnDefineRobot(wxCommandEvent &event);
-    void OnDefineStart(wxCommandEvent &event);
-    void OnDefineGoal(wxCommandEvent &event);
-    void OnPathFinding(wxCommandEvent &event);
-    void OnStartSimulation(wxCommandEvent &WXUNUSED(event));
+    void onDefineEnvironment(wxCommandEvent &event);
+    void onDefineRobot(wxCommandEvent &event);
+    void onDefineStart(wxCommandEvent &event);
+    void onDefineGoal(wxCommandEvent &event);
+    void onPathFinding(wxCommandEvent &event);
+    void onStartSimulation(wxCommandEvent &WXUNUSED(event));
     void SimpleDecompositionPathFinding(wxString algoSelected);
     wxButton *m_defineEnvironment;
     wxButton *m_defineRobot;

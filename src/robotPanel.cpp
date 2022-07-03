@@ -3,18 +3,18 @@
 
 #include <opencv2/opencv.hpp>
 
-void RobotGeometryPanel::OnLeftMouseClicked(wxMouseEvent &event)
+void RobotGeometryPanel::onLeftMouseClicked(wxMouseEvent &event)
 {
     resetDrawing();
     isLeftMouseClicked = true;
 }
 
-void RobotGeometryPanel::OnLeftMouseUp(wxMouseEvent& event)
+void RobotGeometryPanel::onLeftMouseUp(wxMouseEvent& event)
 {
     checkRobotContour();
 }
 
-void RobotGeometryPanel::OnRightMouseUp(wxMouseEvent& event)
+void RobotGeometryPanel::onRightMouseUp(wxMouseEvent& event)
 {
     checkRobotContour();
 }

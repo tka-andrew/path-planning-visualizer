@@ -24,15 +24,15 @@ public:
 
     // REFERENCE: https://wiki.wxwidgets.org/Drawing_on_a_panel_with_a_DC
     // REFERENCE: https://www.informit.com/articles/article.aspx?p=405047
-    void OnPaint(wxPaintEvent & evt);
-    void OnErase(wxEraseEvent& event);
-    void OnSize(wxSizeEvent& event);
-    void OnLeftMouseClicked(wxMouseEvent& event);
+    void onPaint(wxPaintEvent & evt);
+    void onErase(wxEraseEvent& event);
+    void onSize(wxSizeEvent& event);
+    void onLeftMouseClicked(wxMouseEvent& event);
     wxDECLARE_EVENT_TABLE();
 
 private:
-    int clientAreaWidth = 10; // dummy value, will be updated OnSize()
-    int clientAreaHeight = 10; // dummy value, will be updated OnSize()
+    int clientAreaWidth = 10; // dummy value, will be updated onSize()
+    int clientAreaHeight = 10; // dummy value, will be updated onSize()
     bool initialSizeTaken = false;
 };
 

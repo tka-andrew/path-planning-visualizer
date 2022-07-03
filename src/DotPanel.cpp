@@ -5,10 +5,10 @@
 #include <opencv2/opencv.hpp>
 
 wxBEGIN_EVENT_TABLE(DotPanel, wxPanel)
-    EVT_PAINT(DotPanel::OnPaint)
-    EVT_SIZE(DotPanel::OnSize)
-    EVT_ERASE_BACKGROUND(DotPanel::OnErase)
-    EVT_LEFT_DOWN(DotPanel::OnLeftMouseClicked)
+    EVT_PAINT(DotPanel::onPaint)
+    EVT_SIZE(DotPanel::onSize)
+    EVT_ERASE_BACKGROUND(DotPanel::onErase)
+    EVT_LEFT_DOWN(DotPanel::onLeftMouseClicked)
 wxEND_EVENT_TABLE()
 
 DotPanel::DotPanel(wxPanel *parent, wxColor dotColor)
@@ -66,7 +66,7 @@ void DotPanel::resetDrawing()
     this->Refresh();
 }
 
-void DotPanel::OnPaint(wxPaintEvent &evt)
+void DotPanel::onPaint(wxPaintEvent &evt)
 {
     if (dotPoseX != -1 && dotPoseY != -1)
     {
@@ -84,7 +84,7 @@ void DotPanel::OnPaint(wxPaintEvent &evt)
     dc.DrawBitmap(m_drawing, 0, 0);
 }
 
-void DotPanel::OnSize(wxSizeEvent &evt)
+void DotPanel::onSize(wxSizeEvent &evt)
 {
     if (!initialSizeTaken)
     {
@@ -98,12 +98,12 @@ void DotPanel::OnSize(wxSizeEvent &evt)
 
 // REFERENCE: https://wiki.wxwidgets.org/Flicker-Free_Drawing#:~:text=Flicker%20free%20drawing%20can%20be,event%20and%20a%20paint%20event.
 // To avoid flickering
-void DotPanel::OnErase(wxEraseEvent &event)
+void DotPanel::onErase(wxEraseEvent &event)
 {
     return;
 }
 
-void DotPanel::OnLeftMouseClicked(wxMouseEvent &event)
+void DotPanel::onLeftMouseClicked(wxMouseEvent &event)
 {
     int x, y;
     event.GetPosition(&x, &y);
@@ -118,7 +118,7 @@ void DotPanel::OnLeftMouseClicked(wxMouseEvent &event)
 
     // we need 2 different DC here
     // wxClientDC for visualization
-    // wxMemoryDC for updating the bitmap, so that later wxAutoBufferedPaintDC can draw it in OnPaint() function
+    // wxMemoryDC for updating the bitmap, so that later wxAutoBufferedPaintDC can draw it in onPaint() function
     wxClientDC cdc = wxClientDC(this);
     wxMemoryDC mdc(m_drawing); // Constructs a new memory device context and calls SelectObject() with the given bitmap.
 

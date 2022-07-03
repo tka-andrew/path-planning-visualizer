@@ -15,29 +15,29 @@ public:
     wxButton *m_resetDrawing;
     wxBitmap m_drawing;
 
-    void OnResetDrawing(wxCommandEvent &event);
+    void onResetDrawing(wxCommandEvent &event);
     virtual void resetDrawing();
     int getClientAreaHeight();
     int getClientAreaWidth();
 
     // REFERENCE: https://wiki.wxwidgets.org/Drawing_on_a_panel_with_a_DC
     // REFERENCE: https://www.informit.com/articles/article.aspx?p=405047
-    void OnPaint(wxPaintEvent & evt);
-    void OnErase(wxEraseEvent& event);
-    void OnMotion(wxMouseEvent& event);
-    virtual void OnLeftMouseClicked(wxMouseEvent& event);
-    virtual void OnLeftMouseUp(wxMouseEvent& event);
-    void OnRightMouseClicked(wxMouseEvent& event);
-    virtual void OnRightMouseUp(wxMouseEvent& event);
-    void OnSize(wxSizeEvent& event);
+    void onPaint(wxPaintEvent & evt);
+    void onErase(wxEraseEvent& event);
+    void onMotion(wxMouseEvent& event);
+    virtual void onLeftMouseClicked(wxMouseEvent& event);
+    virtual void onLeftMouseUp(wxMouseEvent& event);
+    void onRightMouseClicked(wxMouseEvent& event);
+    virtual void onRightMouseUp(wxMouseEvent& event);
+    void onSize(wxSizeEvent& event);
     wxDECLARE_EVENT_TABLE();
 
 protected:
     bool isLeftMouseClicked = true;
 
 private:
-    int clientAreaWidth = 10; // dummy value, will be updated OnSize()
-    int clientAreaHeight = 10; // dummy value, will be updated OnSize()
+    int clientAreaWidth = 10; // dummy value, will be updated onSize()
+    int clientAreaHeight = 10; // dummy value, will be updated onSize()
     bool initialSizeTaken = false;
 };
 

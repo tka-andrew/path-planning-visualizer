@@ -1,14 +1,14 @@
 #include "DrawingPanel.h"
 
 wxBEGIN_EVENT_TABLE(DrawingPanel, wxPanel)
-    EVT_PAINT(DrawingPanel::OnPaint)
-    EVT_SIZE(DrawingPanel::OnSize)
-    EVT_ERASE_BACKGROUND(DrawingPanel::OnErase)
-    EVT_MOTION(DrawingPanel::OnMotion)
-    EVT_LEFT_DOWN(DrawingPanel::OnLeftMouseClicked)
-    EVT_LEFT_UP(DrawingPanel::OnLeftMouseUp)
-    EVT_RIGHT_DOWN(DrawingPanel::OnRightMouseClicked)
-    EVT_RIGHT_UP(DrawingPanel::OnRightMouseUp)
+    EVT_PAINT(DrawingPanel::onPaint)
+    EVT_SIZE(DrawingPanel::onSize)
+    EVT_ERASE_BACKGROUND(DrawingPanel::onErase)
+    EVT_MOTION(DrawingPanel::onMotion)
+    EVT_LEFT_DOWN(DrawingPanel::onLeftMouseClicked)
+    EVT_LEFT_UP(DrawingPanel::onLeftMouseUp)
+    EVT_RIGHT_DOWN(DrawingPanel::onRightMouseClicked)
+    EVT_RIGHT_UP(DrawingPanel::onRightMouseUp)
 wxEND_EVENT_TABLE()
 
 DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
@@ -18,7 +18,7 @@ DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
     m_resetDrawing = new wxButton(this, resetButtonID, wxT("Reset"),
                                   wxPoint(5, 5));
     Connect(resetButtonID, wxEVT_COMMAND_BUTTON_CLICKED,
-            wxCommandEventHandler(DrawingPanel::OnResetDrawing));
+            wxCommandEventHandler(DrawingPanel::onResetDrawing));
 
     wxBoxSizer *vbox = new wxBoxSizer(wxVERTICAL);
     vbox->Add(m_resetDrawing, 0, wxSHAPED, 0);
@@ -29,13 +29,13 @@ DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
 
     // in this constructor, it is impossible for us to know the size of this panel
     // hence we just simply use a small value
-    // we will re-initialize m_drawing later in OnSize() function
+    // we will re-initialize m_drawing later in onSize() function
     wxImage emptyImage(clientAreaWidth, clientAreaHeight);
     emptyImage.Clear(255); // default white color
     m_drawing = wxBitmap(emptyImage);
 }
 
-void DrawingPanel::OnResetDrawing(wxCommandEvent &event)
+void DrawingPanel::onResetDrawing(wxCommandEvent &event)
 {
     resetDrawing();
 }
@@ -58,7 +58,7 @@ int DrawingPanel::getClientAreaWidth()
     return clientAreaWidth;
 }
 
-void DrawingPanel::OnSize(wxSizeEvent &evt)
+void DrawingPanel::onSize(wxSizeEvent &evt)
 {
     if (!initialSizeTaken)
     {
@@ -72,7 +72,7 @@ void DrawingPanel::OnSize(wxSizeEvent &evt)
     }
 }
 
-void DrawingPanel::OnPaint(wxPaintEvent &evt)
+void DrawingPanel::onPaint(wxPaintEvent &evt)
 {
     wxAutoBufferedPaintDC dc(this);
     dc.DrawBitmap(m_drawing, 0, 0);
@@ -80,13 +80,13 @@ void DrawingPanel::OnPaint(wxPaintEvent &evt)
 
 // REFERENCE: https://wiki.wxwidgets.org/Flicker-Free_Drawing#:~:text=Flicker%20free%20drawing%20can%20be,event%20and%20a%20paint%20event.
 // To avoid flickering
-void DrawingPanel::OnErase(wxEraseEvent &event)
+void DrawingPanel::onErase(wxEraseEvent &event)
 {
     return;
 }
 
 // REFERENCE: https://www.informit.com/articles/article.aspx?p=405047
-void DrawingPanel::OnMotion(wxMouseEvent &event)
+void DrawingPanel::onMotion(wxMouseEvent &event)
 {
     if (event.Dragging())
     {
@@ -100,7 +100,7 @@ void DrawingPanel::OnMotion(wxMouseEvent &event)
 
         // we need 2 different DC here
         // wxClientDC for visualization
-        // wxMemoryDC for updating the bitmap, so that later wxAutoBufferedPaintDC can draw it in OnPaint() function
+        // wxMemoryDC for updating the bitmap, so that later wxAutoBufferedPaintDC can draw it in onPaint() function
         wxClientDC cdc = wxClientDC(this);
         wxMemoryDC mdc(m_drawing); // Constructs a new memory device context and calls SelectObject() with the given bitmap.
 
@@ -126,20 +126,20 @@ void DrawingPanel::OnMotion(wxMouseEvent &event)
     }
 }
 
-void DrawingPanel::OnLeftMouseClicked(wxMouseEvent &event)
+void DrawingPanel::onLeftMouseClicked(wxMouseEvent &event)
 {
     isLeftMouseClicked = true;
 }
 
-void DrawingPanel::OnLeftMouseUp(wxMouseEvent &event)
+void DrawingPanel::onLeftMouseUp(wxMouseEvent &event)
 {
 }
 
-void DrawingPanel::OnRightMouseClicked(wxMouseEvent &event)
+void DrawingPanel::onRightMouseClicked(wxMouseEvent &event)
 {
     isLeftMouseClicked = false;
 }
 
-void DrawingPanel::OnRightMouseUp(wxMouseEvent &event)
+void DrawingPanel::onRightMouseUp(wxMouseEvent &event)
 {
 }

@@ -17,8 +17,8 @@ public:
     void constructGraph();
 
     // REFERENCE: https://www.informit.com/articles/article.aspx?p=405047
-    void OnPaint(wxPaintEvent & evt);
-    void OnErase(wxEraseEvent& event);
+    void onPaint(wxPaintEvent & evt);
+    void onErase(wxEraseEvent& event);
     wxDECLARE_EVENT_TABLE();
 
 };

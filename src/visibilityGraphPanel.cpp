@@ -7,8 +7,8 @@
 #include <vector>
 
 wxBEGIN_EVENT_TABLE(VisibilityGraphPanel, wxPanel)
-    EVT_PAINT(VisibilityGraphPanel::OnPaint)
-    EVT_ERASE_BACKGROUND(VisibilityGraphPanel::OnErase)
+    EVT_PAINT(VisibilityGraphPanel::onPaint)
+    EVT_ERASE_BACKGROUND(VisibilityGraphPanel::onErase)
 wxEND_EVENT_TABLE()
 
 VisibilityGraphPanel::VisibilityGraphPanel(wxPanel *parent)
@@ -93,7 +93,7 @@ void VisibilityGraphPanel::constructGraph()
     this->Refresh();
 }
 
-void VisibilityGraphPanel::OnPaint(wxPaintEvent &evt)
+void VisibilityGraphPanel::onPaint(wxPaintEvent &evt)
 {
     wxAutoBufferedPaintDC dc(this);
     dc.DrawBitmap(m_drawing, 0, 0);
@@ -101,7 +101,7 @@ void VisibilityGraphPanel::OnPaint(wxPaintEvent &evt)
 
 // REFERENCE: https://wiki.wxwidgets.org/Flicker-Free_Drawing#:~:text=Flicker%20free%20drawing%20can%20be,event%20and%20a%20paint%20event.
 // To avoid flickering
-void VisibilityGraphPanel::OnErase(wxEraseEvent &event)
+void VisibilityGraphPanel::onErase(wxEraseEvent &event)
 {
     return;
 }

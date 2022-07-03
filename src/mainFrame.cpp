@@ -1,9 +1,9 @@
 #include "mainFrame.h"
 
 wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
-    EVT_MENU(wxID_EXIT, MainFrame::OnExit)
-    EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
-    EVT_MENU(ID_USAGEGUIDE, MainFrame::OnUsageGuide)
+    EVT_MENU(wxID_EXIT, MainFrame::onExit)
+    EVT_MENU(wxID_ABOUT, MainFrame::onAbout)
+    EVT_MENU(ID_USAGEGUIDE, MainFrame::onUsageGuide)
 wxEND_EVENT_TABLE()
 
 MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &size)
@@ -49,12 +49,12 @@ MainFrame::MainFrame(const wxString &title, const wxPoint &pos, const wxSize &si
     SetStatusText("Path Planning Visualizer - by Tan Kui An Andrew 2022");
 }
 
-void MainFrame::OnExit(wxCommandEvent &event)
+void MainFrame::onExit(wxCommandEvent &event)
 {
     Close(true);
 }
 
-void MainFrame::OnAbout(wxCommandEvent &event)
+void MainFrame::onAbout(wxCommandEvent &event)
 {
     wxMessageBox("The main purpose of this app is to visualize the Path Planning process. \
     \nThis app is developed using wxWdigets. \
@@ -62,7 +62,7 @@ void MainFrame::OnAbout(wxCommandEvent &event)
                  "About this app", wxOK | wxICON_INFORMATION);
 }
 
-void MainFrame::OnUsageGuide(wxCommandEvent &event)
+void MainFrame::onUsageGuide(wxCommandEvent &event)
 {
     wxMessageBox("TODO",
                  "Usage Guide", wxOK | wxICON_INFORMATION);

@@ -35,9 +35,9 @@ public:
     void switchPanel(int panelNum);
 
 private:
-    void OnExit(wxCommandEvent &event);
-    void OnAbout(wxCommandEvent &event);
-    void OnUsageGuide(wxCommandEvent &event);
+    void onExit(wxCommandEvent &event);
+    void onAbout(wxCommandEvent &event);
+    void onUsageGuide(wxCommandEvent &event);
     wxDECLARE_EVENT_TABLE();
 };
 

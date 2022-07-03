@@ -32,17 +32,17 @@ LeftPanel::LeftPanel(wxPanel *parent)
     wxStaticText *comboBoxDescription2 = new wxStaticText(this, wxID_ANY, "Path Finding Algo", wxDefaultPosition, wxDefaultSize, wxALIGN_CENTER | wxST_NO_AUTORESIZE);
 
     Connect(ID_DEFINE_ENVIRONMENT, wxEVT_COMMAND_BUTTON_CLICKED,
-            wxCommandEventHandler(LeftPanel::OnDefineEnvironment));
+            wxCommandEventHandler(LeftPanel::onDefineEnvironment));
     Connect(ID_DEFINE_ROBOT, wxEVT_COMMAND_BUTTON_CLICKED,
-            wxCommandEventHandler(LeftPanel::OnDefineRobot));
+            wxCommandEventHandler(LeftPanel::onDefineRobot));
     Connect(ID_DEFINE_START, wxEVT_COMMAND_BUTTON_CLICKED,
-            wxCommandEventHandler(LeftPanel::OnDefineStart));
+            wxCommandEventHandler(LeftPanel::onDefineStart));
     Connect(ID_DEFINE_GOAL, wxEVT_COMMAND_BUTTON_CLICKED,
-            wxCommandEventHandler(LeftPanel::OnDefineGoal));
+            wxCommandEventHandler(LeftPanel::onDefineGoal));
     Connect(ID_PATHFINDING, wxEVT_COMMAND_BUTTON_CLICKED,
-            wxCommandEventHandler(LeftPanel::OnPathFinding));
+            wxCommandEventHandler(LeftPanel::onPathFinding));
     Connect(ID_STARTSIMULATION, wxEVT_COMMAND_BUTTON_CLICKED,
-            wxCommandEventHandler(LeftPanel::OnStartSimulation));
+            wxCommandEventHandler(LeftPanel::onStartSimulation));
 
     wxBoxSizer *sizer = new wxBoxSizer(wxVERTICAL);
     sizer->Add(m_defineEnvironment, 0, wxEXPAND, 0);
@@ -59,7 +59,7 @@ LeftPanel::LeftPanel(wxPanel *parent)
     this->SetSizer(sizer);
 }
 
-void LeftPanel::OnDefineEnvironment(wxCommandEvent &WXUNUSED(event))
+void LeftPanel::onDefineEnvironment(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     if (mainFrame->currentPanel != 1)
@@ -74,7 +74,7 @@ void LeftPanel::OnDefineEnvironment(wxCommandEvent &WXUNUSED(event))
     }
 }
 
-void LeftPanel::OnDefineRobot(wxCommandEvent &WXUNUSED(event))
+void LeftPanel::onDefineRobot(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
     if (mainFrame->currentPanel != 2)
@@ -89,7 +89,7 @@ void LeftPanel::OnDefineRobot(wxCommandEvent &WXUNUSED(event))
     }
 }
 
-void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
+void LeftPanel::onDefineStart(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
 
@@ -111,7 +111,7 @@ void LeftPanel::OnDefineStart(wxCommandEvent &WXUNUSED(event))
     }
 }
 
-void LeftPanel::OnDefineGoal(wxCommandEvent &WXUNUSED(event))
+void LeftPanel::onDefineGoal(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
 
@@ -141,7 +141,7 @@ void LeftPanel::OnDefineGoal(wxCommandEvent &WXUNUSED(event))
     }
 }
 
-void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
+void LeftPanel::onPathFinding(wxCommandEvent &WXUNUSED(event))
 {
 
     if (this->m_decompositionSelection->GetSelection() == wxNOT_FOUND)
@@ -192,7 +192,7 @@ void LeftPanel::OnPathFinding(wxCommandEvent &WXUNUSED(event))
     }
 }
 
-void LeftPanel::OnStartSimulation(wxCommandEvent &WXUNUSED(event))
+void LeftPanel::onStartSimulation(wxCommandEvent &WXUNUSED(event))
 {
     MainFrame *mainFrame = (MainFrame *)m_parent->GetParent();
 
