@@ -113,6 +113,12 @@ void MainFrame::switchPanel(int panelNum)
         pVisibilityGraphPanel->Show();
         pLeftPanel->pStartSimulationBtn->Enable();
         break;
+    default:
+        wxMessageBox("Invalid panel number!",
+            "ERROR", wxOK | wxICON_INFORMATION);
+        pSizer->Add(pEnvironmentGeometryPanel, 1, wxGROW);
+        pEnvironmentGeometryPanel->Show();
+        break;
     }
     pSizer->Layout();
 }
