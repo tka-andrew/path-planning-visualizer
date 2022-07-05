@@ -11,6 +11,10 @@ class DrawingPanel : public wxPanel
 {
 public:
     DrawingPanel(wxPanel *parent,  int resetButtonID);
+    // always make your destructors virtual if you’re dealing with inheritance
+    // REFERENCE: https://www.learncpp.com/cpp-tutorial/virtual-destructors-virtual-assignment-and-overriding-virtualization/
+    virtual ~DrawingPanel();
+    
     wxButton *pResetDrawingBtn;
     wxBitmap m_drawing;
 

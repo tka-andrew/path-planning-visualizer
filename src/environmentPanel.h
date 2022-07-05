@@ -7,8 +7,8 @@
 class EnvironmentGeometryPanel : public DrawingPanel
 {
 public:
-    // REFERENCE: https://stackoverflow.com/questions/347358/inheriting-constructors
-    using DrawingPanel::DrawingPanel;
+    EnvironmentGeometryPanel(wxPanel *parent,  int resetButtonID);
+    ~EnvironmentGeometryPanel();
 };
 
 #endif

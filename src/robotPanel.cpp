@@ -3,6 +3,17 @@
 
 #include <opencv2/opencv.hpp>
 
+RobotGeometryPanel::RobotGeometryPanel(wxPanel *parent,  int resetButtonID)
+    : DrawingPanel(parent, resetButtonID)
+{
+    
+}
+
+RobotGeometryPanel::~RobotGeometryPanel()
+{
+    
+}
+
 void RobotGeometryPanel::onLeftMouseClicked(wxMouseEvent &event)
 {
     resetDrawing();

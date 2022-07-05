@@ -7,8 +7,8 @@
 class RobotGeometryPanel : public DrawingPanel
 {
 public:
-    // REFERENCE: https://stackoverflow.com/questions/347358/inheriting-constructors
-    using DrawingPanel::DrawingPanel;
+    RobotGeometryPanel(wxPanel *parent,  int resetButtonID);
+    ~RobotGeometryPanel();
     void onLeftMouseClicked(wxMouseEvent& event) override;
     void onLeftMouseUp(wxMouseEvent& event) override;
     void onRightMouseUp(wxMouseEvent& event) override;

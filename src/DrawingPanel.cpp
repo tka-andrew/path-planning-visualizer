@@ -35,6 +35,11 @@ DrawingPanel::DrawingPanel(wxPanel *parent, int resetButtonID)
     m_drawing = wxBitmap(emptyImage);
 }
 
+DrawingPanel::~DrawingPanel()
+{
+    
+}
+
 void DrawingPanel::onResetDrawing(wxCommandEvent &event)
 {
     resetDrawing();
